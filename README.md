@@ -51,7 +51,7 @@ The public project card intentionally has no GitHub link because its repository 
 
 ## Deployment
 
-The app is a static Vite frontend deployed from this repository through the separate `jurol-james-portfolio` Vercel project. The project uses the Vite preset, `npm run build`, and `dist/` output. The canonical URL is `https://jurolc.com/`; the `www` host redirects there. No application server or runtime secrets are required. Vercel project links and authentication files remain local and ignored by Git.
+The app is a static Vite frontend deployed from this repository through the separate `jurol-james-portfolio` Vercel project. The project uses the Vite preset, `npm run build`, and `dist/` output. The canonical URL is `https://jurolc.com/`; Vercel is configured to redirect the `www` host there once Cloudflare DNS points to the project. No application server or runtime secrets are required. Vercel project links and authentication files remain local and ignored by Git.
 
 ## Project structure
 
