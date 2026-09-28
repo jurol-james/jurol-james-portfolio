@@ -46,6 +46,15 @@
   --border-dark: #435346;
   --shadow-block: #e7ebe5;
   --nav-shadow: rgb(23 48 28 / 7%);
+  --brand-mark-text: var(--evergreen-50);
+  --button-text: var(--text-inverse);
+  --heading-accent: var(--evergreen-600);
+  --about-lead: var(--evergreen-800);
+  --rule-accent: var(--evergreen-400);
+  --engagement-accent: var(--evergreen-300);
+  --status-surface: var(--evergreen-100);
+  --interest-mark: var(--evergreen-500);
+  --selection-surface: var(--evergreen-200);
 
   font-family: 'DM Sans', Arial, sans-serif;
   color: var(--text-primary);
@@ -54,6 +63,41 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   scroll-behavior: smooth;
+}
+[data-theme='dark'] {
+  color-scheme: dark;
+  --surface-page: #171d19;
+  --surface-page-rgb: 23 29 25;
+  --surface-card: #202722;
+  --surface-subtle: #1c241e;
+  --surface-tint: #253229;
+  --surface-brand: #1f3524;
+  --surface-dark: #1b2c20;
+  --surface-deep: #121a15;
+  --text-primary: #f1f3ed;
+  --text-secondary: #c3cec2;
+  --text-muted: #aebbad;
+  --text-inverse: #f1f3ed;
+  --text-inverse-muted: #c2d1c1;
+  --primary: var(--evergreen-300);
+  --primary-hover: var(--evergreen-200);
+  --accent: var(--evergreen-300);
+  --focus-ring: var(--evergreen-300);
+  --focus-ring-inverse: var(--evergreen-200);
+  --border: #364239;
+  --border-strong: #4c5d50;
+  --border-dark: #4a5f4e;
+  --shadow-block: #2c3830;
+  --nav-shadow: rgb(0 0 0 / 24%);
+  --brand-mark-text: var(--evergreen-950);
+  --button-text: var(--evergreen-950);
+  --heading-accent: var(--evergreen-300);
+  --about-lead: var(--evergreen-200);
+  --rule-accent: var(--evergreen-400);
+  --engagement-accent: var(--evergreen-500);
+  --status-surface: #314b36;
+  --interest-mark: var(--evergreen-300);
+  --selection-surface: var(--evergreen-700);
 }
 * {
   box-sizing: border-box;
@@ -79,7 +123,7 @@ p {
   line-height: 1.7;
 }
 ::selection {
-  background: var(--evergreen-200);
+  background: var(--selection-surface);
   color: var(--text-primary);
 }
 :focus-visible {
@@ -123,6 +167,36 @@ section {
   justify-content: space-between;
   gap: 32px;
 }
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 36px;
+  height: 36px;
+  padding: 7px;
+  color: var(--text-secondary);
+  background: var(--surface-card);
+  border: 1px solid var(--border-strong);
+  border-radius: 50%;
+  cursor: pointer;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
+}
+.theme-toggle:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.theme-toggle svg {
+  display: block;
+  width: 19px;
+  height: 19px;
+}
 .brand {
   display: inline-flex;
   gap: 13px;
@@ -135,7 +209,7 @@ section {
   width: 42px;
   height: 42px;
   background: var(--primary);
-  color: var(--evergreen-50);
+  color: var(--brand-mark-text);
   font-family: Manrope, Arial, sans-serif;
   font-size: 13px;
   font-weight: 800;
@@ -222,7 +296,7 @@ section {
 }
 .hero h1 em {
   font-style: normal;
-  color: var(--evergreen-600);
+  color: var(--heading-accent);
 }
 .hero-intro {
   font-size: clamp(17px, 1.5vw, 20px);
@@ -253,7 +327,7 @@ section {
 }
 .button-primary {
   background: var(--primary);
-  color: var(--text-inverse);
+  color: var(--button-text);
 }
 .button-primary:hover {
   background: var(--primary-hover);
@@ -408,7 +482,7 @@ section {
     Arial,
     sans-serif;
   letter-spacing: -0.035em;
-  color: var(--evergreen-800);
+  color: var(--about-lead);
 }
 .about-copy {
   color: var(--text-secondary);
@@ -456,7 +530,7 @@ section {
   display: block;
   width: 36px;
   height: 2px;
-  background: var(--evergreen-400);
+  background: var(--rule-accent);
 }
 .skills-section {
   background: var(--surface-card);
@@ -573,7 +647,7 @@ section {
 .engagement {
   padding: 20px;
   background: var(--surface-tint);
-  border-left: 2px solid var(--evergreen-300);
+  border-left: 2px solid var(--engagement-accent);
 }
 .engagement-title {
   display: flex;
@@ -631,7 +705,7 @@ section {
 }
 .status-pill {
   color: var(--accent);
-  background: var(--evergreen-100);
+  background: var(--status-surface);
   padding: 8px 11px;
   letter-spacing: 0.08em;
 }
@@ -710,7 +784,7 @@ section {
   font-weight: 700;
 }
 .interests-section li span {
-  color: var(--evergreen-500);
+  color: var(--interest-mark);
 }
 .contact-section {
   background: var(--surface-dark);
@@ -809,6 +883,10 @@ section {
   }
   .header-inner {
     min-height: 68px;
+  }
+  .header-controls {
+    margin-left: auto;
+    gap: 12px;
   }
   .menu-toggle {
     display: flex;
@@ -1006,7 +1084,7 @@ section {
     height: 34px;
   }
   .brand-name {
-    max-width: 140px;
+    max-width: 112px;
     font-size: 12px;
     line-height: 1.2;
   }
@@ -1015,6 +1093,9 @@ section {
   }
   .menu-toggle {
     flex: none;
+  }
+  .header-controls {
+    gap: 8px;
   }
 }
 @media (prefers-reduced-motion: reduce) {

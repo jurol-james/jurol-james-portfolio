@@ -17,6 +17,8 @@ npm run dev
 
 Open the local URL printed by Vite.
 
+The theme toggle saves an explicit light or dark choice in browser storage. Until a choice is made, the site follows the operating system theme.
+
 ## Validation and build
 
 ```bash
@@ -45,7 +47,7 @@ This workspace supplies a read-only `.git` mount, so repository metadata lives i
 - `public/cv/Jurol-James-Cabaluna-CV.pdf`: public CV download. Replace this file when the CV is updated, preserving the URL if possible.
 - `index.html`: page title, meta description, and Open Graph text. Add an absolute `og:image` URL after deployment if you want social preview artwork.
 
-The public project card intentionally has no GitHub link because its repository is private. Add a real canonical URL only after the production domain is known. A profile photograph is optional; the design does not require one.
+The public project card intentionally has no GitHub link because its repository is private.
 
 ## Deployment
 

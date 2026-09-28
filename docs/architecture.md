@@ -14,8 +14,8 @@ The page moves from positioning and engineering focus to technical capabilities,
 
 ## Styling and interaction
 
-Plain CSS keeps the site small and easy to maintain. The design uses typography, whitespace, borders, and a restrained palette. The only required stateful interaction is the mobile navigation menu. Semantic sections, visible focus states, a skip link, and reduced-motion support are included.
+Plain CSS keeps the site small and easy to maintain. The design uses typography, whitespace, borders, and a restrained palette. Light and dark themes share the Evergreen scale and switch semantic CSS tokens on `html[data-theme]`. A small head script applies saved or system preference before the page renders; the header toggle persists an explicit choice. Semantic sections, visible focus states, a skip link, and reduced-motion support are included.
 
 ## Testing and CI
 
-Vitest and React Testing Library verify key content, mobile menu behavior, contact URLs, the CV link, and internal navigation targets. CI runs install, formatting, lint, TypeScript checking, tests, and the production build. Browser screenshots at desktop, tablet, and mobile sizes are used for visual review before publication.
+Vitest and React Testing Library verify key content, mobile menu behavior, theme preferences, contact URLs, the CV link, and internal navigation targets. CI runs install, formatting, lint, TypeScript checking, tests, and the production build. Browser screenshots at desktop, tablet, and mobile sizes are used for visual review before publication.

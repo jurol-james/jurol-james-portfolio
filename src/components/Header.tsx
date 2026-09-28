@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { profile } from '../data/profile'
+import { ThemeToggle } from './ThemeToggle'
 
 const navigation = [
   { label: 'About', href: '#about' },
@@ -24,19 +25,6 @@ export function Header() {
             <small>Engineering portfolio</small>
           </span>
         </a>
-        <button
-          className="menu-toggle"
-          type="button"
-          aria-controls="primary-navigation"
-          aria-expanded={menuOpen}
-          onClick={() => setMenuOpen((open) => !open)}
-        >
-          <span className="menu-icon" aria-hidden="true">
-            <span />
-            <span />
-          </span>
-          <span>{menuOpen ? 'Close' : 'Menu'}</span>
-        </button>
         <nav
           id="primary-navigation"
           className={menuOpen ? 'navigation is-open' : 'navigation'}
@@ -48,6 +36,22 @@ export function Header() {
             </a>
           ))}
         </nav>
+        <div className="header-controls">
+          <ThemeToggle />
+          <button
+            className="menu-toggle"
+            type="button"
+            aria-controls="primary-navigation"
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            <span className="menu-icon" aria-hidden="true">
+              <span />
+              <span />
+            </span>
+            <span>{menuOpen ? 'Close' : 'Menu'}</span>
+          </button>
+        </div>
       </div>
     </header>
   )
