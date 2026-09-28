@@ -45,13 +45,13 @@ This workspace supplies a read-only `.git` mount, so repository metadata lives i
 - `src/data/skills.ts`: engineering focus, grouped capabilities, and interests.
 - `src/data/projects.ts`: personal work. Add projects as typed objects; only verified URLs become links.
 - `public/cv/Jurol-James-Cabaluna-CV.pdf`: public CV download. Replace this file when the CV is updated, preserving the URL if possible.
-- `index.html`: page title, meta description, and Open Graph text. Add an absolute `og:image` URL after deployment if you want social preview artwork.
+- `index.html`: page title, meta description, canonical URL, and Open Graph text. Add an absolute `og:image` URL if you want dedicated social preview artwork.
 
 The public project card intentionally has no GitHub link because its repository is private.
 
 ## Deployment
 
-The app is a static Vite frontend. Import this repository into Vercel, select the Vite framework preset, and use the default build command (`npm run build`) and output directory (`dist`). No server, secrets, or external infrastructure is required. Deployment resources are not created by this repository.
+The app is a static Vite frontend deployed from this repository through the separate `jurol-james-portfolio` Vercel project. The project uses the Vite preset, `npm run build`, and `dist/` output. The canonical URL is `https://jurolc.com/`; the `www` host redirects there. No application server or runtime secrets are required. Vercel project links and authentication files remain local and ignored by Git.
 
 ## Project structure
 
