@@ -1,6 +1,6 @@
-# Engineering portfolio
+# Jurol James Cabaluna — Engineering Portfolio
 
-A static personal portfolio for an experienced software engineer working across Java backend engineering, full-stack delivery, architecture, and technical leadership. The content emphasizes warehouse and logistics systems without turning the site into a full CV.
+A static portfolio for Jurol James R. Cabaluna, a senior software engineer specializing in Java and Spring Boot. It presents full-stack delivery, technical leadership, and enterprise integration work, with recent warehouse and logistics experience prominent but concise.
 
 ## Stack
 
@@ -23,6 +23,8 @@ Open the local URL printed by Vite.
 npm run lint
 npm run typecheck
 npm test
+npm run format
+npm run format:check
 npm run build
 npm run preview
 ```
@@ -35,13 +37,14 @@ This workspace supplies a read-only `.git` mount, so repository metadata lives i
 
 ## Update the content
 
-- `src/data/profile.ts`: name, initials, introduction, email, GitHub, LinkedIn, and CV link. Missing contact values intentionally render as plain text.
+- `src/data/profile.ts`: name, positioning, introduction, email, social links, and CV download path.
 - `src/data/experience.ts`: work history and selected responsibilities. Review all public descriptions with your employer/client confidentiality obligations in mind.
 - `src/data/skills.ts`: engineering focus, grouped capabilities, and interests.
 - `src/data/projects.ts`: personal work. Add projects as typed objects; only verified URLs become links.
-- `index.html`: page title, meta description, and Open Graph text. Replace `public/og-placeholder.svg` and `public/favicon.svg` if desired. Add an absolute `og:image` URL after deployment if you want social preview artwork.
+- `public/cv/Jurol-James-Cabaluna-CV.pdf`: public CV download. Replace this file when the CV is updated, preserving the URL if possible.
+- `index.html`: page title, meta description, and Open Graph text. Add an absolute `og:image` URL after deployment if you want social preview artwork.
 
-Before publishing, replace the TODO identity/contact fields, verify all professional claims, and add a real canonical URL only after the production domain is known. A profile photograph is optional; the design does not require one.
+The public project card intentionally has no GitHub link because its repository is private. Add a real canonical URL only after the production domain is known. A profile photograph is optional; the design does not require one.
 
 ## Deployment
 
@@ -56,7 +59,7 @@ src/
   test/        Test setup
   App.tsx      Page composition
   styles.css   Design system and responsive styles
-public/        Static identity placeholders
+public/        Favicon, social artwork, and public CV
 .github/       CI validation
 docs/          Architecture decisions
 ```

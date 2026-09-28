@@ -3,7 +3,12 @@ dist/
 coverage/
 .git-local/
 .idea/
-.env.local
-.env.*.local
+.DS_Store
+.env*
+!.env.example
 .vercel/
 *.tsbuildinfo
+*.log
+*.pem
+*.key
+*.p12

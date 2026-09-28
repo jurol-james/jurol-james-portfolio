@@ -1,6 +1,8 @@
 export interface Link {
   label: string
-  url?: string // TODO: Set only to a verified public URL.
+  url?: string
+  ariaLabel?: string
+  download?: boolean
 }
 
 export interface Experience {

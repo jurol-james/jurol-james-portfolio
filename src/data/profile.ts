@@ -1,9 +1,8 @@
 import type { Link } from './types'
 
 export const profile = {
-  // TODO: Replace before publishing under your name.
-  name: 'Your Name',
-  initials: 'YN',
+  name: 'Jurol James R. Cabaluna',
+  initials: 'JC',
   eyebrow: 'Senior Software Engineer · Technical Lead',
   headline: {
     lead: 'I build',
@@ -11,16 +10,30 @@ export const profile = {
     close: 'for complex operations.',
   },
   introduction:
-    'More than 10 years in software development, with deep Java and Spring Boot expertise and hands-on full-stack experience. I work across system design, delivery, and technical leadership—especially where applications, data, and real-world operations meet.',
+    'More than 10 years building enterprise software, with Java and Spring Boot at the core of my work. I bring backend depth, React and TypeScript delivery, and hands-on technical leadership to systems that connect people, data, and operations.',
   about:
-    'My work spans enterprise applications, warehouse and logistics systems, integrations, and data workflows. I enjoy turning ambiguous requirements into maintainable software, helping teams make sound technical decisions, and staying close enough to the code to solve difficult problems.',
+    'I design and build enterprise applications across ERP, warehouse and logistics, IoT monitoring, and system integration. My work spans backend services, data models, APIs, and user interfaces. I enjoy solving complex application problems while helping teams choose approaches they can maintain.',
+  aboutLeadership:
+    'In recent projects I have led assigned modules and integration initiatives, contributed to architecture and implementation decisions, reviewed code, and helped coordinate delivery. I have also led a development team on an IoT monitoring platform.',
   contact: {
-    // TODO: Add verified public links and an email address. Missing values render as placeholders, never fake links.
-    email: undefined as string | undefined,
+    email: 'greenmachinedisposer@gmail.com',
     links: [
-      { label: 'GitHub' },
-      { label: 'LinkedIn' },
-      { label: 'Download CV' },
+      {
+        label: 'GitHub',
+        url: 'https://github.com/jurol-james',
+        ariaLabel: 'Visit Jurol James Cabaluna on GitHub',
+      },
+      {
+        label: 'LinkedIn',
+        url: 'https://www.linkedin.com/in/jurol/',
+        ariaLabel: 'Visit Jurol James Cabaluna on LinkedIn',
+      },
+      {
+        label: 'Download CV',
+        url: '/cv/Jurol-James-Cabaluna-CV.pdf',
+        ariaLabel: 'Download Jurol James Cabaluna CV as PDF',
+        download: true,
+      },
     ] as Link[],
   },
 }

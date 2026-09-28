@@ -6,7 +6,7 @@ The portfolio has no user accounts, dynamic data source, or server-side workflow
 
 ## Data separated from presentation
 
-Profile, experience, skills, and projects live in `src/data/` as typed objects. Components render those objects and contain no invented fallback URLs. Optional links are omitted when unknown. This makes factual review and future updates straightforward.
+Profile, experience, skills, and projects live in `src/data/` as typed objects. Components render those objects and contain no invented fallback URLs. The CV is copied unchanged to `public/cv/` and linked through profile data. Private project repositories remain unlinked. This makes factual review and future updates straightforward.
 
 ## Single-page information hierarchy
 
@@ -18,4 +18,4 @@ Plain CSS keeps the site small and easy to maintain. The design uses typography,
 
 ## Testing and CI
 
-Vitest and React Testing Library verify key content, mobile menu behavior, and missing-link handling. CI runs install, lint, TypeScript checking, tests, and the production build. Browser-based visual review at desktop and mobile sizes is still useful before publication.
+Vitest and React Testing Library verify key content, mobile menu behavior, contact URLs, the CV link, and internal navigation targets. CI runs install, formatting, lint, TypeScript checking, tests, and the production build. Browser screenshots at desktop, tablet, and mobile sizes are used for visual review before publication.

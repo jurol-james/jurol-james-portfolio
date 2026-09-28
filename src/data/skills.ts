@@ -4,32 +4,59 @@ export const skillGroups: SkillGroup[] = [
   {
     title: 'Backend engineering',
     lead: 'Java · Spring Boot · REST APIs',
-    supporting: ['Java 8 / 11 / 21', 'Spring Security', 'Spring Data JPA / Hibernate', 'OpenFeign', 'Quartz', 'AOP', 'JWT / OAuth', 'Node.js / Express'],
+    supporting: [
+      'Java 8 / 11 / 21',
+      'Spring Security',
+      'Spring Data JPA / Hibernate',
+      'OpenFeign',
+      'JWT / OAuth',
+      'Node.js / Express',
+    ],
   },
   {
     title: 'Frontend delivery',
     lead: 'React · TypeScript · Material UI',
-    supporting: ['JavaScript', 'HTML / CSS', 'Angular', 'Vue'],
+    supporting: ['JavaScript', 'HTML / CSS', 'Angular', 'Vue experience'],
   },
   {
     title: 'Data engineering',
     lead: 'PostgreSQL · SQL · Data ingestion',
-    supporting: ['SQL Server / Azure SQL', 'Dremio', 'ETL integrations', 'Database design'],
+    supporting: [
+      'SQL Server / Azure SQL',
+      'MySQL / MariaDB',
+      'MongoDB',
+      'Dremio',
+      'ETL integrations',
+    ],
   },
   {
     title: 'Cloud & delivery',
     lead: 'Azure · Docker · CI/CD',
-    supporting: ['Azure App Services', 'Azure Database for PostgreSQL', 'Azure DevOps', 'GitHub Actions', 'Git'],
+    supporting: [
+      'Azure App Services',
+      'Azure DevOps',
+      'GitHub Actions',
+      'AWS experience',
+      'Kubernetes',
+      'Jenkins',
+    ],
   },
   {
     title: 'Architecture & integration',
     lead: 'System design · API design · Integrations',
-    supporting: ['Microservices', 'Event-driven systems', 'Azure Service Bus', 'Authentication & authorization', 'WMS integration', 'IoT data visualization'],
+    supporting: [
+      'Microservices',
+      'Event-driven systems',
+      'Azure Service Bus',
+      'SSO / identity provider integration',
+      'WMS integration',
+      'IoT data visualization',
+    ],
   },
   {
     title: 'Engineering practice',
     lead: 'Technical design · Code review · Troubleshooting',
-    supporting: ['Testcontainers', 'Application Insights', 'Postman', 'DBeaver', 'Uptime Kuma'],
+    supporting: ['Git', 'Testcontainers', 'Application Insights', 'Postman', 'DBeaver'],
   },
 ]
 
@@ -37,17 +64,20 @@ export const focusAreas = [
   {
     number: '01',
     title: 'Systems that support operations',
-    description: 'Building and evolving applications for warehouse, inventory, order, and material workflows where reliability and clarity matter.',
+    description:
+      'Building applications for warehouse, order, inventory, and material workflows, with integrations that keep operational data moving.',
   },
   {
     number: '02',
     title: 'Architecture through delivery',
-    description: 'Shaping module boundaries, APIs, data models, and implementation strategy while staying involved in the code and reviews.',
+    description:
+      'Guiding assigned modules and initiatives through technical design, implementation choices, code review, and delivery.',
   },
   {
     number: '03',
     title: 'Full-stack problem solving',
-    description: 'Connecting Java services, integrations, and data with usable React and TypeScript interfaces to deliver complete features.',
+    description:
+      'Connecting Java services, integrations, and data with usable React and TypeScript interfaces to deliver complete features.',
   },
 ]
 

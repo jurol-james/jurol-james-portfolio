@@ -13,19 +13,27 @@ export function ExperienceCard({ item }: { item: Experience }) {
         <h3>{item.role}</h3>
         <p className="experience-summary">{item.summary}</p>
         <ul className="highlight-list">
-          {item.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}
+          {item.highlights.map((highlight) => (
+            <li key={highlight}>{highlight}</li>
+          ))}
         </ul>
         {item.engagements && (
           <div className="engagements">
             {item.engagements.map((engagement) => (
               <div className="engagement" key={engagement.name}>
-                <div className="engagement-title"><strong>{engagement.name}</strong>{engagement.period && <span>{engagement.period}</span>}</div>
+                <div className="engagement-title">
+                  <strong>{engagement.name}</strong>
+                  {engagement.period && <span>{engagement.period}</span>}
+                </div>
                 <p>{engagement.description}</p>
               </div>
             ))}
           </div>
         )}
-        <div className="technology-line" aria-label="Technologies"><span>TOOLS & TECHNOLOGIES</span><p>{item.technologies.join(' · ')}</p></div>
+        <div className="technology-line" aria-label="Technologies">
+          <span>TOOLS & TECHNOLOGIES</span>
+          <p>{item.technologies.join(' · ')}</p>
+        </div>
       </div>
     </article>
   )
