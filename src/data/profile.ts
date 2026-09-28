@@ -15,6 +15,12 @@ export const profile = {
     'I design and build enterprise applications across ERP, warehouse and logistics, IoT monitoring, and system integration. My work spans backend services, data models, APIs, and user interfaces. I enjoy solving complex application problems while helping teams choose approaches they can maintain.',
   aboutLeadership:
     'In recent projects I have led assigned modules and integration initiatives, contributed to architecture and implementation decisions, reviewed code, and helped coordinate delivery. I have also led a development team on an IoT monitoring platform.',
+  portrait: {
+    src: '/images/profile/jurol-james-profile.webp',
+    alt: 'Portrait of Jurol James Cabaluna',
+    width: 840,
+    height: 1050,
+  },
   contact: {
     email: 'greenmachinedisposer@gmail.com',
     links: [

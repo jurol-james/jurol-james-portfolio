@@ -12,6 +12,10 @@ describe('portfolio', () => {
     expect(screen.getByText('Tellworks · AIMSPlus+')).toBeInTheDocument()
     expect(screen.getByText('NEC Telecomm Software Philippines, Inc.')).toBeInTheDocument()
     expect(screen.getByText(/led an eight-person development team/i)).toBeInTheDocument()
+    expect(screen.getByRole('img', { name: 'Portrait of Jurol James Cabaluna' })).toHaveAttribute(
+      'src',
+      '/images/profile/jurol-james-profile.webp',
+    )
     expect(screen.getByRole('heading', { name: 'Zerp Quantum Crypto' })).toBeInTheDocument()
     expect(screen.getByText(/not production cryptographic infrastructure/i)).toBeInTheDocument()
   })

@@ -86,6 +86,15 @@ function App() {
                 I connect the details of implementation with the bigger decisions that make software
                 last.
               </p>
+              <img
+                className="about-portrait"
+                src={profile.portrait.src}
+                alt={profile.portrait.alt}
+                width={profile.portrait.width}
+                height={profile.portrait.height}
+                loading="lazy"
+                decoding="async"
+              />
               <div className="about-copy">
                 <p>{profile.about}</p>
                 <p>{profile.aboutLeadership}</p>

@@ -38,6 +38,7 @@ This workspace supplies a read-only `.git` mount, so repository metadata lives i
 ## Update the content
 
 - `src/data/profile.ts`: name, positioning, introduction, email, social links, and CV download path.
+- `public/images/profile/jurol-james-profile.webp`: optimized portrait used in the About section.
 - `src/data/experience.ts`: work history and selected responsibilities. Review all public descriptions with your employer/client confidentiality obligations in mind.
 - `src/data/skills.ts`: engineering focus, grouped capabilities, and interests.
 - `src/data/projects.ts`: personal work. Add projects as typed objects; only verified URLs become links.

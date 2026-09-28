@@ -382,10 +382,25 @@ section {
   background: var(--surface-page);
 }
 .about-grid {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(45px, 8vw, 130px);
   padding-left: 270px;
+}
+.about-portrait {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 230px;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  background: var(--surface-tint);
 }
 .about-lead {
   font:
@@ -778,6 +793,9 @@ section {
   .projects-grid {
     padding-left: 220px;
   }
+  .about-portrait {
+    width: 180px;
+  }
   .section-heading-main {
     display: block;
   }
@@ -881,6 +899,11 @@ section {
   .about-grid {
     gap: 10px;
   }
+  .about-portrait {
+    position: static;
+    width: min(70vw, 260px);
+    margin: 8px 0 16px;
+  }
   .about-lead {
     margin-bottom: 0;
   }
@@ -967,6 +990,31 @@ section {
   }
   .footer-inner span:nth-child(2) {
     display: none;
+  }
+}
+@media (max-width: 360px) {
+  .header-inner {
+    gap: 12px;
+  }
+  .brand {
+    gap: 8px;
+    min-width: 0;
+  }
+  .brand-mark {
+    flex: none;
+    width: 34px;
+    height: 34px;
+  }
+  .brand-name {
+    max-width: 140px;
+    font-size: 12px;
+    line-height: 1.2;
+  }
+  .brand-name small {
+    display: none;
+  }
+  .menu-toggle {
+    flex: none;
   }
 }
 @media (prefers-reduced-motion: reduce) {
