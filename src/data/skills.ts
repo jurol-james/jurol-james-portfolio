@@ -16,7 +16,12 @@ export const skillGroups: SkillGroup[] = [
   {
     title: 'Frontend delivery',
     lead: 'React · TypeScript · Material UI',
-    supporting: ['JavaScript', 'HTML / CSS', 'Angular', 'Vue experience'],
+    supporting: ['JavaScript', 'HTML / CSS', 'Angular experience'],
+  },
+  {
+    title: 'Geospatial Analysis',
+    lead: 'Interactive mapping · spatial visualization',
+    supporting: ['Leaflet', 'Turf.js'],
   },
   {
     title: 'Data engineering',

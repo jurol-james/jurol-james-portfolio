@@ -26,16 +26,19 @@ export const profile = {
     links: [
       {
         label: 'GitHub',
+        icon: 'github',
         url: 'https://github.com/jurol-james',
         ariaLabel: 'Visit Jurol James Cabaluna on GitHub',
       },
       {
         label: 'LinkedIn',
+        icon: 'linkedin',
         url: 'https://www.linkedin.com/in/jurol/',
         ariaLabel: 'Visit Jurol James Cabaluna on LinkedIn',
       },
       {
         label: 'Download CV',
+        icon: 'download',
         url: '/cv/Jurol-James-Cabaluna-CV.pdf',
         ariaLabel: 'Download Jurol James Cabaluna CV as PDF',
         download: true,

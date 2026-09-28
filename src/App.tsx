@@ -2,10 +2,12 @@ import { Header } from './components/Header'
 import { SectionHeading } from './components/SectionHeading'
 import { ExperienceCard } from './components/ExperienceCard'
 import { ProjectCard } from './components/ProjectCard'
+import { ContactIcon } from './components/ContactIcon'
 import { profile } from './data/profile'
 import { focusAreas, interests, skillGroups } from './data/skills'
 import { earlierCareer, experience } from './data/experience'
 import { projects } from './data/projects'
+import { certifications } from './data/certifications'
 
 function App() {
   return (
@@ -185,6 +187,29 @@ function App() {
         </section>
 
         <section
+          className="section certifications-section"
+          id="certifications"
+          aria-labelledby="certifications-heading"
+        >
+          <div className="container">
+            <SectionHeading
+              id="certifications-heading"
+              index="05"
+              label="CREDENTIALS"
+              title="Certifications"
+            />
+            <ul className="certification-list">
+              {certifications.map((certification) => (
+                <li key={certification.name}>
+                  <span>{certification.year}</span>
+                  <strong>{certification.name}</strong>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        <section
           className="section projects-section"
           id="projects"
           aria-labelledby="projects-heading"
@@ -192,7 +217,7 @@ function App() {
           <div className="container">
             <SectionHeading
               id="projects-heading"
-              index="05"
+              index="06"
               label="PERSONAL WORK"
               title="Selected projects"
               description="A space for focused experiments and independent engineering work."
@@ -213,7 +238,7 @@ function App() {
           <div className="container interests-grid">
             <div>
               <div className="section-kicker">
-                <span>06</span>
+                <span>07</span>
                 <span>LOOKING AHEAD</span>
               </div>
               <h2 id="interests-heading">What keeps me curious.</h2>
@@ -233,7 +258,7 @@ function App() {
         <section className="contact-section" id="contact" aria-labelledby="contact-heading">
           <div className="container contact-grid">
             <div>
-              <p className="eyebrow">07 / CONTACT</p>
+              <p className="eyebrow">08 / CONTACT</p>
               <h2 id="contact-heading">Let’s talk about building something that works.</h2>
               <p>
                 Open to conversations about senior engineering, technical leadership, and
@@ -242,7 +267,11 @@ function App() {
             </div>
             <div className="contact-links" role="group" aria-label="Contact methods">
               <a href={`mailto:${profile.contact.email}`} aria-label={`Email ${profile.name}`}>
-                Email <span>{profile.contact.email} ↗</span>
+                <span className="contact-link-label">
+                  <ContactIcon name="email" />
+                  Email
+                </span>
+                <span className="contact-link-meta">{profile.contact.email} ↗</span>
               </a>
               {profile.contact.links.map((link) =>
                 link.url ? (
@@ -254,13 +283,19 @@ function App() {
                     rel={link.download ? undefined : 'noopener noreferrer'}
                     download={link.download ? '' : undefined}
                   >
-                    {link.label}
-                    <span>{link.download ? 'PDF ↓' : 'Open ↗'}</span>
+                    <span className="contact-link-label">
+                      <ContactIcon name={link.icon} />
+                      {link.label}
+                    </span>
+                    <span className="contact-link-meta">{link.download ? 'PDF ↓' : 'Open ↗'}</span>
                   </a>
                 ) : (
                   <div key={link.label}>
-                    {link.label}
-                    <span>Details to be added</span>
+                    <span className="contact-link-label">
+                      <ContactIcon name={link.icon} />
+                      {link.label}
+                    </span>
+                    <span className="contact-link-meta">Details to be added</span>
                   </div>
                 ),
               )}

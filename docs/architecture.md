@@ -10,7 +10,7 @@ Profile, experience, skills, and projects live in `src/data/` as typed objects. 
 
 ## Single-page information hierarchy
 
-The page moves from positioning and engineering focus to technical capabilities, professional experience, a small project section, interests, and contact. CoDev/Tellworks warehouse and logistics work receives the most visible experience detail. The project section remains secondary and explicitly labels experimental cryptography work.
+The page moves from positioning and engineering focus to technical capabilities, professional experience, a compact certifications list, a small project section, interests, and contact. CoDev/Tellworks warehouse and logistics work receives the most visible experience detail. The project section remains secondary and explicitly labels experimental cryptography work.
 
 ## Styling and interaction
 

@@ -70,7 +70,7 @@ export const experience: Experience[] = [
         name: 'IaMS',
         period: 'Mar 2019 — Jul 2022',
         description:
-          'Inspection and Monitoring System for collecting, processing, and visualizing data from connected devices and multiple integrated solutions.',
+          'Inspection and Monitoring System for collecting, processing, and visualizing data from connected devices and multiple integrated solutions, including map-based visualization and geospatial processing with Leaflet and Turf.js.',
       },
       {
         name: 'Material Management System (MMS)',

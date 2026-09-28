@@ -682,6 +682,36 @@ section {
   margin: 9px 0 0;
   line-height: 1.8;
 }
+.certifications-section {
+  background: var(--surface-page);
+}
+.certification-list {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 270px;
+}
+.certification-list li {
+  display: grid;
+  grid-template-columns: 90px minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+  border-top: 1px solid var(--border);
+  padding: 23px 0;
+}
+.certification-list li:last-child {
+  border-bottom: 1px solid var(--border);
+}
+.certification-list span {
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 800;
+}
+.certification-list strong {
+  font:
+    700 17px/1.5 Manrope,
+    Arial,
+    sans-serif;
+}
 .projects-section {
   background: var(--surface-card);
 }
@@ -822,12 +852,32 @@ section {
   font-size: 15px;
   font-weight: 700;
 }
-.contact-links span {
+.contact-link-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  flex: none;
+  color: var(--text-inverse);
+  font-size: 15px;
+  font-weight: 700;
+}
+.contact-icon {
+  display: block;
+  flex: none;
+  width: 18px;
+  height: 18px;
+  color: var(--evergreen-200);
+}
+.contact-link-meta {
+  min-width: 0;
   font-size: 12px;
   font-weight: 500;
   color: var(--text-inverse-muted);
+  overflow-wrap: anywhere;
+  text-align: right;
 }
-.contact-links a:hover span {
+.contact-links a:hover .contact-link-meta,
+.contact-links a:hover .contact-icon {
   color: var(--evergreen-100);
 }
 .site-footer {
@@ -864,7 +914,8 @@ section {
   }
   .about-grid,
   .skills-grid,
-  .projects-grid {
+  .projects-grid,
+  .certification-list {
     padding-left: 220px;
   }
   .about-portrait {
@@ -971,7 +1022,8 @@ section {
   }
   .about-grid,
   .skills-grid,
-  .projects-grid {
+  .projects-grid,
+  .certification-list {
     padding-left: 0;
   }
   .about-grid {
@@ -1062,6 +1114,10 @@ section {
   }
   .project-card {
     padding: 23px;
+  }
+  .certification-list li {
+    grid-template-columns: 52px minmax(0, 1fr);
+    gap: 16px;
   }
   .footer-inner {
     flex-wrap: wrap;

@@ -1,8 +1,14 @@
 export interface Link {
   label: string
+  icon: 'github' | 'linkedin' | 'download'
   url?: string
   ariaLabel?: string
   download?: boolean
+}
+
+export interface Certification {
+  year: number
+  name: string
 }
 
 export interface Experience {

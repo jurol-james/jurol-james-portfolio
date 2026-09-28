@@ -43,6 +43,7 @@ This workspace supplies a read-only `.git` mount, so repository metadata lives i
 - `public/images/profile/jurol-james-profile.webp`: optimized portrait used in the About section.
 - `src/data/experience.ts`: work history and selected responsibilities. Review all public descriptions with your employer/client confidentiality obligations in mind.
 - `src/data/skills.ts`: engineering focus, grouped capabilities, and interests.
+- `src/data/certifications.ts`: certification names and years.
 - `src/data/projects.ts`: personal work. Add projects as typed objects; only verified URLs become links.
 - `public/cv/Jurol-James-Cabaluna-CV.pdf`: public CV download. Replace this file when the CV is updated, preserving the URL if possible.
 - `index.html`: page title, meta description, canonical URL, and Open Graph text. Add an absolute `og:image` URL if you want dedicated social preview artwork.

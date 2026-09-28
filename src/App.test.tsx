@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it } from 'vitest'
 import App from './App'
@@ -80,6 +80,45 @@ describe('portfolio', () => {
         container.querySelector(`#${target}`),
         `Missing target for ${link.textContent}`,
       ).not.toBeNull()
+    }
+  })
+
+  it('shows the corrected capabilities, NEC mapping work, and three certifications', () => {
+    const { container } = render(<App />)
+    const skills = container.querySelector<HTMLElement>('#skills')!
+    const necExperience = container.querySelector<HTMLElement>('#experience')!
+    const certifications = container.querySelector<HTMLElement>('#certifications')!
+
+    expect(container).not.toHaveTextContent(/\bVue\b/i)
+    expect(
+      within(skills).getByText('JavaScript · HTML / CSS · Angular experience'),
+    ).toBeInTheDocument()
+    expect(within(skills).getByRole('heading', { name: 'Geospatial Analysis' })).toBeInTheDocument()
+    expect(within(skills).getByText('Leaflet · Turf.js')).toBeInTheDocument()
+    expect(
+      within(necExperience).getByText(
+        /map-based visualization and geospatial processing with Leaflet and Turf.js/,
+      ),
+    ).toBeInTheDocument()
+
+    expect(within(certifications).getAllByRole('listitem')).toHaveLength(3)
+    for (const [year, name] of [
+      [2019, 'Linux Essentials Examination'],
+      [2019, 'Philippine National IT Standard (PhilNITS) - Fundamental Engineering Examination'],
+      [2025, 'Generative AI for Software Development'],
+    ] as const) {
+      expect(within(certifications).getByText(name).closest('li')).toHaveTextContent(String(year))
+    }
+  })
+
+  it('keeps all four contact icons decorative beside visible labels', () => {
+    const { container } = render(<App />)
+    const contact = container.querySelector('.contact-links')!
+
+    for (const name of ['email', 'github', 'linkedin', 'download']) {
+      const icon = contact.querySelector(`.contact-icon-${name}`)
+      expect(icon).not.toBeNull()
+      expect(icon).toHaveAttribute('aria-hidden', 'true')
     }
   })
 })
