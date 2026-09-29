@@ -42,9 +42,13 @@ export const skillGroups: SkillGroup[] = [
       'Azure DevOps',
       'GitHub Actions',
       'AWS experience',
-      'Kubernetes',
       'Jenkins',
     ],
+  },
+  {
+    title: 'Identity & Security',
+    lead: 'Keycloak · Microsoft Entra ID · SSO',
+    supporting: ['OAuth 2.0', 'OpenID Connect (OIDC)', 'JWT', 'Authentication & authorization'],
   },
   {
     title: 'Architecture & integration',
@@ -60,8 +64,8 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     title: 'Engineering practice',
-    lead: 'Technical design · Code review · Troubleshooting',
-    supporting: ['Git', 'Testcontainers', 'Application Insights', 'Postman', 'DBeaver'],
+    lead: 'Agile · Scrum · Test-Driven Development (TDD)',
+    supporting: ['Technical design', 'Code review', 'Testing', 'Troubleshooting', 'Waterfall'],
   },
 ]
 

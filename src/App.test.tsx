@@ -95,11 +95,34 @@ describe('portfolio', () => {
     ).toBeInTheDocument()
     expect(within(skills).getByRole('heading', { name: 'Geospatial Analysis' })).toBeInTheDocument()
     expect(within(skills).getByText('Leaflet · Turf.js')).toBeInTheDocument()
+    expect(within(skills).getByRole('heading', { name: 'Identity & Security' })).toBeInTheDocument()
+    expect(within(skills).getByText('Keycloak · Microsoft Entra ID · SSO')).toBeInTheDocument()
+    expect(
+      within(skills).getByText(/OAuth 2\.0 · OpenID Connect \(OIDC\) · JWT/),
+    ).toBeInTheDocument()
+    expect(
+      within(skills).getByRole('heading', { name: 'Engineering practice' }),
+    ).toBeInTheDocument()
+    expect(
+      within(skills).getByText('Agile · Scrum · Test-Driven Development (TDD)'),
+    ).toBeInTheDocument()
+    expect(
+      within(skills).getByText(
+        'Technical design · Code review · Testing · Troubleshooting · Waterfall',
+      ),
+    ).toBeInTheDocument()
+    expect(within(skills).queryByText(/Kubernetes/i)).not.toBeInTheDocument()
+    expect(within(necExperience).getByText(/MongoDB/)).toBeInTheDocument()
     expect(
       within(necExperience).getByText(
         /map-based visualization and geospatial processing with Leaflet and Turf.js/,
       ),
     ).toBeInTheDocument()
+    const earlierCareerCompanies = [...container.querySelectorAll('.earlier-career li span')].map(
+      (company) => company.textContent,
+    )
+    expect(earlierCareerCompanies[1]).toContain('Spingine Corporation')
+    expect(earlierCareerCompanies[2]).toContain('Geckotech Solutions')
 
     expect(within(certifications).getAllByRole('listitem')).toHaveLength(3)
     for (const [year, name] of [
