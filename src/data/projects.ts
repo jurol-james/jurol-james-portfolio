@@ -18,6 +18,8 @@ export const projects: Project[] = [
       'GitHub Actions',
     ],
     architectureNote: 'Includes automated interoperability testing.',
+    mavenCentralUrl:
+      'https://central.sonatype.com/artifact/io.github.jurol-james/zerp-quantum-crypto',
     // TODO: Add a verified public repository URL if available.
   },
 ]

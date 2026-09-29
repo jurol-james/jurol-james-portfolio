@@ -36,6 +36,7 @@ export interface Project {
   architectureNote?: string
   githubUrl?: string
   demoUrl?: string
+  mavenCentralUrl?: string
 }
 
 export interface SkillGroup {

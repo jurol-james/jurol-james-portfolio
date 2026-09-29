@@ -18,6 +18,15 @@ describe('portfolio', () => {
     )
     expect(screen.getByRole('heading', { name: 'Zerp Quantum Crypto' })).toBeInTheDocument()
     expect(screen.getByText(/not production cryptographic infrastructure/i)).toBeInTheDocument()
+    const mavenCentralLink = screen.getByRole('link', {
+      name: 'View Zerp Quantum Crypto on Maven Central',
+    })
+    expect(mavenCentralLink).toHaveAttribute(
+      'href',
+      'https://central.sonatype.com/artifact/io.github.jurol-james/zerp-quantum-crypto',
+    )
+    expect(mavenCentralLink).toHaveAttribute('target', '_blank')
+    expect(mavenCentralLink).toHaveAttribute('rel', 'noopener noreferrer')
   })
 
   it('opens mobile navigation and closes it after choosing a section', async () => {
