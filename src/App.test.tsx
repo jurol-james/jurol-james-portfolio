@@ -4,6 +4,16 @@ import { describe, expect, it } from 'vitest'
 import App from './App'
 
 describe('portfolio', () => {
+  it('uses the Jurol mark as the accessible portfolio home identity', () => {
+    render(<App />)
+
+    const home = screen.getByRole('link', { name: 'Jurol James portfolio home' })
+    expect(home.querySelector('.brand-mark')).toHaveAttribute('aria-hidden', 'true')
+    expect(home.querySelector('.brand-mark img')).toHaveAttribute('src', '/favicon.svg')
+    expect(home.querySelector('.brand-mark img')).toHaveAttribute('alt', '')
+    expect(home).toHaveTextContent('Jurol James')
+  })
+
   it('presents the key professional context and keeps experimental work clearly labeled', () => {
     render(<App />)
 

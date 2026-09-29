@@ -17,9 +17,9 @@ export function Header() {
   return (
     <header className="site-header">
       <div className="container header-inner">
-        <a className="brand" href="#top" aria-label="Back to top">
+        <a className="brand" href="#top" aria-label="Jurol James portfolio home">
           <span className="brand-mark" aria-hidden="true">
-            {profile.initials}
+            <img src="/favicon.svg" alt="" />
           </span>
           <span className="brand-name">
             {profile.name}
