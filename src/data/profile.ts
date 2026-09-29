@@ -3,6 +3,10 @@ import type { Link } from './types'
 export const profile = {
   name: 'Jurol James R. Cabaluna',
   initials: 'JC',
+  blog: {
+    label: 'Blog',
+    url: 'https://blog.jurolc.com',
+  },
   eyebrow: 'Senior Software Engineer · Technical Lead',
   headline: {
     lead: 'I build',

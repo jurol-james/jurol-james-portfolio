@@ -37,8 +37,27 @@ describe('portfolio', () => {
     expect(menu).toHaveAttribute('aria-expanded', 'false')
     await user.click(menu)
     expect(screen.getByRole('button', { name: 'Close' })).toHaveAttribute('aria-expanded', 'true')
+    expect(
+      within(screen.getByRole('navigation', { name: 'Primary navigation' })).getByRole('link', {
+        name: 'Blog',
+      }),
+    ).toHaveAttribute('href', 'https://blog.jurolc.com')
     await user.click(screen.getByRole('link', { name: 'Experience' }))
     expect(screen.getByRole('button', { name: 'Menu' })).toHaveAttribute('aria-expanded', 'false')
+  })
+
+  it('links to the blog from the primary navigation and footer in the same tab', () => {
+    render(<App />)
+
+    const navigationBlog = within(
+      screen.getByRole('navigation', { name: 'Primary navigation' }),
+    ).getByRole('link', { name: 'Blog' })
+    const footerBlog = within(document.querySelector('footer')!).getByRole('link', { name: 'Blog' })
+
+    for (const link of [navigationBlog, footerBlog]) {
+      expect(link).toHaveAttribute('href', 'https://blog.jurolc.com')
+      expect(link).not.toHaveAttribute('target')
+    }
   })
 
   it('uses verified public contact details and a local CV download', () => {

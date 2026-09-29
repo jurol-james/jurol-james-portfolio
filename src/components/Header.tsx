@@ -7,6 +7,7 @@ const navigation = [
   { label: 'Expertise', href: '#expertise' },
   { label: 'Experience', href: '#experience' },
   { label: 'Projects', href: '#projects' },
+  { label: profile.blog.label, href: profile.blog.url },
   { label: 'Contact', href: '#contact' },
 ]
 

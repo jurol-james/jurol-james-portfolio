@@ -324,6 +324,7 @@ function App() {
               ))}
           </div>
           <a href="#top">Back to top ↑</a>
+          <a href={profile.blog.url}>{profile.blog.label}</a>
         </div>
       </footer>
     </>
