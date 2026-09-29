@@ -62,6 +62,7 @@ export const experience: Experience[] = [
       'React',
       'mBaaS Cloud Functions',
       'jQuery',
+      'MongoDB',
       'Leaflet',
       'Turf.js',
     ],
@@ -89,10 +90,10 @@ export const earlierCareer = [
     period: 'Sep 2017 — Feb 2018',
     note: 'Deployed at NEC before direct employment.',
   },
-  { role: 'Software Engineer', company: 'Geckotech Solutions', period: 'Jan 2016 — Dec 2017' },
   {
     role: 'Junior Software Developer',
     company: 'Spingine Corporation',
     period: 'Jan 2017 — Mar 2017',
   },
+  { role: 'Software Engineer', company: 'Geckotech Solutions', period: 'Jan 2016 — Dec 2017' },
 ]

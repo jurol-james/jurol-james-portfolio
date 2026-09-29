@@ -22,7 +22,7 @@ export function ProjectCard({ project }: { project: Project }) {
         )}
         <p className="project-tech">{project.technologies.join(' · ')}</p>
       </div>
-      {(project.githubUrl || project.demoUrl) && (
+      {(project.githubUrl || project.demoUrl || project.mavenCentralUrl) && (
         <div className="project-links">
           {project.githubUrl && (
             <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
@@ -32,6 +32,16 @@ export function ProjectCard({ project }: { project: Project }) {
           {project.demoUrl && (
             <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
               Live demo <span aria-hidden="true">↗</span>
+            </a>
+          )}
+          {project.mavenCentralUrl && (
+            <a
+              href={project.mavenCentralUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`View ${project.name} on Maven Central`}
+            >
+              Maven Central <span aria-hidden="true">↗</span>
             </a>
           )}
         </div>
