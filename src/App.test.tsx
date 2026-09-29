@@ -9,7 +9,7 @@ describe('portfolio', () => {
 
     const home = screen.getByRole('link', { name: 'Jurol James portfolio home' })
     expect(home.querySelector('.brand-mark')).toHaveAttribute('aria-hidden', 'true')
-    expect(home.querySelector('.brand-mark img')).toHaveAttribute('src', '/jurol-mark.png')
+    expect(home.querySelector('.brand-mark img')).toHaveAttribute('src', '/favicon.svg')
     expect(home.querySelector('.brand-mark img')).toHaveAttribute('alt', '')
     expect(home).toHaveTextContent('Jurol James')
   })

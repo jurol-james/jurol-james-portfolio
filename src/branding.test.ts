@@ -7,10 +7,20 @@ const html = readFileSync(resolve(process.cwd(), 'index.html'), 'utf8')
 
 describe('Jurol brand assets', () => {
   it('references self-hosted browser and Apple touch icons', () => {
-    for (const href of ['/favicon.ico', '/favicon-32x32.png', '/apple-touch-icon.png']) {
+    for (const href of [
+      '/favicon.svg',
+      '/favicon.ico',
+      '/favicon-32x32.png',
+      '/apple-touch-icon.png',
+    ]) {
       expect(html).toContain(`href="${href}"`)
       expect(existsSync(resolve(publicDirectory, href.slice(1)))).toBe(true)
     }
+    const svg = readFileSync(resolve(publicDirectory, 'favicon.svg'), 'utf8')
+    expect(svg).toContain('<path')
+    expect(svg).not.toContain('<image')
+    expect(svg).not.toContain('data:image')
+    expect(svg).not.toContain('<rect')
   })
 
   it('provides 16px, 32px, and 48px entries in the multi-size favicon', () => {

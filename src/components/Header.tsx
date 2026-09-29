@@ -19,7 +19,7 @@ export function Header() {
       <div className="container header-inner">
         <a className="brand" href="#top" aria-label="Jurol James portfolio home">
           <span className="brand-mark" aria-hidden="true">
-            <img src="/jurol-mark.png" alt="" />
+            <img src="/favicon.svg" alt="" />
           </span>
           <span className="brand-name">
             {profile.name}
