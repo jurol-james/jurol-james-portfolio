@@ -1,3 +1,4 @@
+import { SpeedInsights } from '@vercel/speed-insights/react'
 import { Header } from './components/Header'
 import { SectionHeading } from './components/SectionHeading'
 import { ExperienceCard } from './components/ExperienceCard'
@@ -339,6 +340,7 @@ function App() {
           <a href="#top">Back to top ↑</a>
         </div>
       </footer>
+      <SpeedInsights />
     </>
   )
 }
