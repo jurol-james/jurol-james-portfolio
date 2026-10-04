@@ -264,6 +264,15 @@ function App() {
                 Open to conversations about senior engineering, technical leadership, and
                 architecture work.
               </p>
+              <img
+                className="contact-brand-logo"
+                src="/jurol-logo.svg"
+                width="337"
+                height="337"
+                alt="JUROL — Greener Than Your Mind"
+                loading="lazy"
+                decoding="async"
+              />
             </div>
             <div className="contact-links" role="group" aria-label="Contact methods">
               <a href={`mailto:${profile.contact.email}`} aria-label={`Email ${profile.name}`}>

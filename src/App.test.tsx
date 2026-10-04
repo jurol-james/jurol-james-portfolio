@@ -182,4 +182,13 @@ describe('portfolio', () => {
       expect(icon).toHaveAttribute('aria-hidden', 'true')
     }
   })
+
+  it('shows the full JUROL logo and motto in the contact section', () => {
+    render(<App />)
+
+    const contact = document.getElementById('contact')!
+    expect(
+      within(contact).getByRole('img', { name: 'JUROL — Greener Than Your Mind' }),
+    ).toHaveAttribute('src', '/jurol-logo.svg')
+  })
 })

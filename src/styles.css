@@ -844,6 +844,12 @@ section {
   max-width: 440px;
   margin-top: 22px;
 }
+.contact-brand-logo {
+  display: block;
+  width: min(160px, 100%);
+  height: auto;
+  margin-top: 30px;
+}
 .contact-links {
   align-self: center;
   border-top: 1px solid var(--border-dark);
