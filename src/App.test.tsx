@@ -191,4 +191,28 @@ describe('portfolio', () => {
       within(contact).getByRole('img', { name: 'JUROL — Greener Than Your Mind' }),
     ).toHaveAttribute('src', '/jurol-logo.svg')
   })
+
+  it('presents the Professional Journey identities using local accessible logos', () => {
+    render(<App />)
+
+    const section = screen.getByRole('region', { name: 'Professional Journey' })
+    expect(
+      within(section).getByText(
+        "Selected companies and products I've worked with throughout my career.",
+      ),
+    ).toBeInTheDocument()
+    expect(section).not.toHaveTextContent(/partners|clients|sponsors/i)
+
+    const expectedLogos = [
+      ['JUROL', '/jurol-logo.svg'],
+      ['Tellworks Logistics', '/images/professional-journey/tellworks-logistics.svg'],
+      ['AIMS+', '/images/professional-journey/aimsplus.svg'],
+      ['CoDev', '/images/professional-journey/codev.svg'],
+      ['NEC', '/images/professional-journey/nec.svg'],
+    ]
+
+    for (const [name, src] of expectedLogos) {
+      expect(within(section).getByRole('img', { name })).toHaveAttribute('src', src)
+    }
+  })
 })

@@ -3,6 +3,7 @@ import { SectionHeading } from './components/SectionHeading'
 import { ExperienceCard } from './components/ExperienceCard'
 import { ProjectCard } from './components/ProjectCard'
 import { ContactIcon } from './components/ContactIcon'
+import { ProfessionalJourney } from './components/ProfessionalJourney'
 import { profile } from './data/profile'
 import { focusAreas, interests, skillGroups } from './data/skills'
 import { earlierCareer, experience } from './data/experience'
@@ -148,6 +149,8 @@ function App() {
           </div>
         </section>
 
+        <ProfessionalJourney />
+
         <section
           className="section experience-section"
           id="experience"
@@ -156,7 +159,7 @@ function App() {
           <div className="container">
             <SectionHeading
               id="experience-heading"
-              index="04"
+              index="05"
               label="EXPERIENCE"
               title="Experience in context"
               description="Selected work and responsibilities, with an emphasis on recent logistics systems."
@@ -194,7 +197,7 @@ function App() {
           <div className="container">
             <SectionHeading
               id="certifications-heading"
-              index="05"
+              index="06"
               label="CREDENTIALS"
               title="Certifications"
             />
@@ -217,7 +220,7 @@ function App() {
           <div className="container">
             <SectionHeading
               id="projects-heading"
-              index="06"
+              index="07"
               label="PERSONAL WORK"
               title="Selected projects"
               description="A space for focused experiments and independent engineering work."
@@ -238,7 +241,7 @@ function App() {
           <div className="container interests-grid">
             <div>
               <div className="section-kicker">
-                <span>07</span>
+                <span>08</span>
                 <span>LOOKING AHEAD</span>
               </div>
               <h2 id="interests-heading">What keeps me curious.</h2>
@@ -258,7 +261,7 @@ function App() {
         <section className="contact-section" id="contact" aria-labelledby="contact-heading">
           <div className="container contact-grid">
             <div>
-              <p className="eyebrow">08 / CONTACT</p>
+              <p className="eyebrow">09 / CONTACT</p>
               <h2 id="contact-heading">Let’s talk about building something that works.</h2>
               <p>
                 Open to conversations about senior engineering, technical leadership, and
