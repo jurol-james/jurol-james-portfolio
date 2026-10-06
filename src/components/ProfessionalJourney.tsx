@@ -1,7 +1,14 @@
 import { SectionHeading } from './SectionHeading'
 
 const identities = [
-  { name: 'JUROL', src: '/jurol-logo.svg', width: 337, height: 337, mark: true },
+  {
+    name: 'JUROL',
+    src: '/jurol-logo.svg',
+    width: 337,
+    height: 337,
+    mark: true,
+    darkLogoCanvas: true,
+  },
   {
     name: 'Tellworks Logistics',
     src: '/images/professional-journey/tellworks-logistics.svg',

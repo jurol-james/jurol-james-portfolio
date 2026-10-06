@@ -219,5 +219,8 @@ describe('portfolio', () => {
     expect(
       within(section).getByRole('img', { name: 'Hadean Supercomputing Ltd' }).parentElement,
     ).toHaveClass('professional-journey-logo-canvas-dark')
+    expect(within(section).getByRole('img', { name: 'JUROL' }).parentElement).toHaveClass(
+      'professional-journey-logo-canvas-dark',
+    )
   })
 })
