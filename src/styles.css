@@ -580,7 +580,7 @@ section {
 }
 .professional-journey-grid {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 16px;
   margin: 0;
   padding: 0;
@@ -603,6 +603,10 @@ section {
   padding: 8px;
   border-radius: 4px;
   background: var(--neutral-0);
+}
+.professional-journey-logo-canvas-dark {
+  border: 1px solid var(--border-dark);
+  background: var(--surface-dark);
 }
 .professional-journey-logo {
   display: block;
@@ -982,12 +986,6 @@ section {
   .professional-journey-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
-  .professional-journey-card:nth-last-child(2) {
-    grid-column: 2;
-  }
-  .professional-journey-card:last-child {
-    grid-column: 3;
-  }
 }
 @media (max-width: 760px) {
   .container {
@@ -1131,10 +1129,6 @@ section {
   }
   .professional-journey-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .professional-journey-card:nth-last-child(2),
-  .professional-journey-card:last-child {
-    grid-column: auto;
   }
   .contact-section {
     padding: 80px 0;

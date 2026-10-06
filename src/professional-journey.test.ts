@@ -12,6 +12,7 @@ const corporateAssets = [
   { name: 'AIMS+', file: 'aimsplus.svg', viewBox: '0 0 274 70' },
   { name: 'CoDev', file: 'codev.svg', viewBox: '0 0 429.587 105.529' },
   { name: 'NEC', file: 'nec.svg', viewBox: '0 0 902.6 71.1' },
+  { name: 'Hadean Supercomputing Ltd', file: 'hadean.svg', viewBox: '0 0 424 119.1' },
 ]
 
 describe('Professional Journey logo assets', () => {
@@ -21,6 +22,8 @@ describe('Professional Journey logo assets', () => {
       /aimsplus\.com|tellworks\.com|cdn\.prod\.website-files\.com|ph\.nec\.com/i,
     )
     expect(component).not.toContain('aimsplus-logo-300x77.png')
+    expect(component).toContain("src: '/images/professional-journey/hadean.svg'")
+    expect(component).not.toContain('hadean.com')
 
     for (const asset of corporateAssets) {
       const assetPath = resolve(publicDirectory, 'images/professional-journey', asset.file)
@@ -44,5 +47,16 @@ describe('Professional Journey logo assets', () => {
         /\bid="Layer_[^"]+"|\bid="レイヤー_[^"]+"|data-name=/i,
       )
     }
+
+    const hadean = readFileSync(
+      resolve(publicDirectory, 'images/professional-journey/hadean.svg'),
+      'utf8',
+    )
+    expect(hadean).toContain('fill:#FFFFFF')
+    expect(hadean).not.toMatch(/<(?:script|foreignObject|image)\b/i)
+    expect(hadean).not.toMatch(/\bon[a-z]+\s*=|javascript\s*:/i)
+    expect(hadean).not.toMatch(
+      /(?:href|xlink:href)\s*=\s*["'](?:https?:|\/\/|data:|javascript:)|@import|url\(\s*["']?(?:https?:)?\/\//i,
+    )
   })
 })

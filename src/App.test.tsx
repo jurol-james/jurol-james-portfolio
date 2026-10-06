@@ -209,10 +209,18 @@ describe('portfolio', () => {
       ['AIMS+', '/images/professional-journey/aimsplus.svg'],
       ['CoDev', '/images/professional-journey/codev.svg'],
       ['NEC', '/images/professional-journey/nec.svg'],
+      ['Hadean Supercomputing Ltd', '/images/professional-journey/hadean.svg'],
     ]
 
+    expect(within(section).getAllByRole('listitem')).toHaveLength(6)
     for (const [name, src] of expectedLogos) {
       expect(within(section).getByRole('img', { name })).toHaveAttribute('src', src)
     }
+    expect(
+      within(section).getByRole('img', { name: 'Hadean Supercomputing Ltd' }).parentElement,
+    ).toHaveClass('professional-journey-logo-canvas-dark')
+    expect(within(section).getByRole('img', { name: 'JUROL' }).parentElement).toHaveClass(
+      'professional-journey-logo-canvas-dark',
+    )
   })
 })
