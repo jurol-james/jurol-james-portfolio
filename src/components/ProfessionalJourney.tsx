@@ -26,6 +26,13 @@ const identities = [
     width: 903,
     height: 71,
   },
+  {
+    name: 'Hadean Supercomputing Ltd',
+    src: '/images/professional-journey/hadean.svg',
+    width: 424,
+    height: 119.1,
+    darkLogoCanvas: true,
+  },
 ]
 
 export function ProfessionalJourney() {
@@ -46,7 +53,11 @@ export function ProfessionalJourney() {
         <ul className="professional-journey-grid">
           {identities.map((identity) => (
             <li className="professional-journey-card" key={identity.name}>
-              <div className="professional-journey-logo-canvas">
+              <div
+                className={`professional-journey-logo-canvas${
+                  identity.darkLogoCanvas ? ' professional-journey-logo-canvas-dark' : ''
+                }`}
+              >
                 <img
                   className={
                     identity.mark
