@@ -50,7 +50,7 @@ describe('Vercel security headers', () => {
     expect(directives['media-src']).toEqual(["'none'"])
   })
 
-  it('allows the unchanged theme bootstrap by its exact script hash', () => {
+  it('allows the theme bootstrap by its exact script hash', () => {
     const html = readFileSync(resolve(process.cwd(), 'index.html'), 'utf8')
     const inlineScripts = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)]
     expect(inlineScripts).toHaveLength(1)

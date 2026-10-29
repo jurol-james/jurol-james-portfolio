@@ -7,6 +7,7 @@ const component = readFileSync(
   resolve(process.cwd(), 'src/components/ProfessionalJourney.tsx'),
   'utf8',
 )
+const styles = readFileSync(resolve(process.cwd(), 'src/styles.css'), 'utf8')
 const corporateAssets = [
   { name: 'Tellworks Logistics', file: 'tellworks-logistics.svg', viewBox: '0 0 200 52.255' },
   { name: 'AIMS+', file: 'aimsplus.svg', viewBox: '0 0 274 70' },
@@ -16,6 +17,14 @@ const corporateAssets = [
 ]
 
 describe('Professional Journey logo assets', () => {
+  it('uses a pale dark-theme canvas for low-contrast marks and preserves Hadean’s dark canvas', () => {
+    expect(component.match(/lightCanvasInDark: true/g)).toHaveLength(4)
+    expect(styles).toMatch(
+      /:root\[data-theme='dark'\]\s+\.professional-journey-logo-canvas-light-in-dark\s*\{\s*background:\s*#f1f5f5;\s*\}/,
+    )
+    expect(styles).toContain('.professional-journey-logo-canvas-dark {\n  background: #101820;')
+  })
+
   it('uses the existing full JUROL logo and local corporate SVGs', () => {
     expect(component).toContain("src: '/jurol-logo.svg'")
     expect(component).not.toMatch(

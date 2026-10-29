@@ -1,0 +1,1632 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark light" />
+    <meta
+      name="description"
+      content="Creative Engineering concept with a Java Person editor, flowing geometry, and verified portfolio content."
+    />
+    <title>Midnight Developer — Final Concept: Creative Engineering</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #0b0f14;
+        --surface: #141b23;
+        --surface-2: #1d2630;
+        --text: #f5f7fa;
+        --body: #d5dce5;
+        --muted: #98a4b3;
+        --line: #5e6c7a;
+        --control-line: #5e6c7a;
+        --teal: #6ecac3;
+        --green: #3ddc97;
+        --focus: #6ecac3;
+        --button-ink: #0b0f14;
+        --button-bg: #3ddc97;
+        --editor-bg: #101820;
+        --editor-head: #1a232d;
+        --editor-text: #f5f7fa;
+        --editor-muted: #a1acb8;
+        --editor-keyword: #6ecac3;
+        --editor-type: #a9d7ff;
+        --editor-string: #8de3b7;
+        --editor-ident: #e6ebf1;
+        --editor-border: #5e6c7a;
+        --max: 1240px;
+        --display: 'Space Grotesk', 'Segoe UI', system-ui, sans-serif;
+        --sans: Inter, 'Segoe UI', Arial, sans-serif;
+        --mono: 'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, monospace;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: #070a0e;
+        color: var(--text);
+        font-family: var(--sans);
+        -webkit-font-smoothing: antialiased;
+      }
+      .page {
+        position: relative;
+        min-height: 100vh;
+        overflow: clip;
+        background: var(--bg);
+        color: var(--text);
+      }
+      body:has(#light-preview:checked) .page {
+        color-scheme: light;
+        --bg: #f5f7f8;
+        --surface: #ffffff;
+        --surface-2: #edf2f1;
+        --text: #17211d;
+        --body: #33443d;
+        --muted: #4e5d53;
+        --line: #7c898d;
+        --control-line: #7c898d;
+        --teal: #0b6e6a;
+        --green: #087a4b;
+        --focus: #0b6e6a;
+        --button-ink: #ffffff;
+        --button-bg: #087a4b;
+        --editor-bg: #f5f8fa;
+        --editor-head: #e8eeef;
+        --editor-text: #17211d;
+        --editor-muted: #4e5d53;
+        --editor-keyword: #0b6e6a;
+        --editor-type: #315a99;
+        --editor-string: #087a4b;
+        --editor-ident: #33443d;
+        --editor-border: #7c898d;
+      }
+      a {
+        color: inherit;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 4px;
+      }
+      a:hover {
+        color: var(--teal);
+      }
+      :focus-visible {
+        outline: 3px solid var(--focus);
+        outline-offset: 4px;
+      }
+      .preview-bar {
+        min-height: 44px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 8px 16px;
+        background: #202722;
+        color: #f1f3ed;
+        font: 600 13px/1.4 var(--sans);
+      }
+      .preview-bar label {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        cursor: pointer;
+      }
+      .preview-bar input {
+        width: 18px;
+        height: 18px;
+        accent-color: #3ddc97;
+      }
+      .container {
+        width: min(calc(100% - 72px), var(--max));
+        margin-inline: auto;
+      }
+      .skip {
+        position: absolute;
+        z-index: 9;
+        top: -100px;
+        left: 16px;
+        padding: 12px 16px;
+        background: var(--surface);
+        color: var(--text);
+      }
+      .skip:focus {
+        top: 12px;
+      }
+      main section[id] {
+        scroll-margin-top: 84px;
+      }
+      .header {
+        position: sticky;
+        z-index: 5;
+        top: 0;
+        border-bottom: 1px solid var(--line);
+        background: color-mix(in srgb, var(--bg) 94%, transparent);
+      }
+      .header-row {
+        min-height: 76px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 24px;
+      }
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 11px;
+        text-decoration: none;
+      }
+      .brand-mark {
+        display: block;
+        width: 40px;
+        height: 40px;
+        overflow: hidden;
+        border-radius: 50%;
+      }
+      .brand-mark img {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+      .brand-name {
+        display: grid;
+        gap: 3px;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: -0.025em;
+      }
+      .brand-name small {
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+      }
+      .nav-row {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+      }
+      .desktop-nav {
+        display: flex;
+        align-items: center;
+        gap: clamp(15px, 2vw, 27px);
+      }
+      .desktop-nav a,
+      .mobile-nav a {
+        color: var(--body);
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+      }
+      .desktop-nav a {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+      }
+      .desktop-nav a:hover,
+      .mobile-nav a:hover {
+        color: var(--teal);
+      }
+      .menu {
+        display: none;
+      }
+      .cv-button {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 14px;
+        border: 1px solid var(--control-line);
+        border-radius: 999px;
+        color: var(--text);
+        font-size: 13px;
+        font-weight: 650;
+        text-decoration: none;
+      }
+      .hero {
+        position: relative;
+        isolation: isolate;
+        padding: clamp(68px, 9vw, 124px) 0 48px;
+      }
+      .hero::before {
+        position: absolute;
+        z-index: -1;
+        top: -145px;
+        right: -120px;
+        width: min(78vw, 850px);
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgb(61 220 151 / 10%),
+          rgb(110 202 195 / 4%) 36%,
+          transparent 68%
+        );
+        content: '';
+        pointer-events: none;
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 0.93fr) minmax(0, 1.07fr);
+        gap: clamp(35px, 7vw, 96px);
+        align-items: center;
+      }
+      .eyebrow,
+      .section-label,
+      .meta,
+      .art-label {
+        color: var(--muted);
+        font: 550 11px/1.45 var(--mono);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 0 0 22px;
+      }
+      .eyebrow-mark {
+        width: 21px;
+        height: 2px;
+        background: var(--green);
+      }
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+      h1,
+      h2 {
+        font-family: var(--display);
+      }
+      h1 {
+        max-width: 700px;
+        margin-bottom: 23px;
+        font-size: clamp(49px, 6.5vw, 86px);
+        font-weight: 650;
+        line-height: 0.98;
+        letter-spacing: -0.06em;
+      }
+      h1 span {
+        color: var(--green);
+      }
+      .intro {
+        max-width: 560px;
+        margin-bottom: 27px;
+        color: var(--body);
+        font-size: 17px;
+        line-height: 1.72;
+      }
+      .roleline {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 18px;
+        margin-bottom: 30px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .roleline span + span::before {
+        margin-right: 17px;
+        color: var(--green);
+        content: '·';
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 14px;
+      }
+      .button {
+        min-height: 48px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 11px;
+        padding: 0 19px;
+        border-radius: 999px;
+        background: var(--button-bg);
+        color: var(--button-ink);
+        font-size: 14px;
+        font-weight: 750;
+        text-decoration: none;
+        transition:
+          transform 180ms ease,
+          box-shadow 180ms ease;
+      }
+      .button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 26px rgb(61 220 151 / 18%);
+        color: var(--button-ink);
+      }
+      .text-link {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        padding: 0 9px;
+        color: var(--text);
+        font-size: 14px;
+        font-weight: 650;
+      }
+      .hero-art-composition {
+        position: relative;
+        min-height: 560px;
+        display: grid;
+        place-items: center;
+        isolation: isolate;
+        padding: 44px 0 30px;
+      }
+      .geometry-backdrop {
+        position: absolute;
+        z-index: -1;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        pointer-events: none;
+      }
+      .visual-glow {
+        position: absolute;
+        width: 78%;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgb(110 202 195 / 16%),
+          rgb(61 220 151 / 9%) 32%,
+          transparent 70%
+        );
+        filter: blur(4px);
+      }
+      .orbit-art {
+        position: relative;
+        width: min(100%, 540px);
+        height: auto;
+        overflow: visible;
+        opacity: 0.88;
+        animation: float-shape 24s ease-in-out infinite alternate;
+      }
+      .orbit-guide {
+        opacity: 0.65;
+      }
+      .orbit-core {
+        fill: var(--surface);
+      }
+      .code-editor {
+        position: relative;
+        z-index: 2;
+        width: min(92%, 440px);
+        min-width: 0;
+        margin: 0;
+        overflow: hidden;
+        border: 1px solid var(--editor-border);
+        border-radius: 14px;
+        background: var(--editor-bg);
+        color: var(--editor-text);
+        box-shadow:
+          0 26px 72px rgb(0 0 0 / 30%),
+          0 0 40px rgb(110 202 195 / 8%);
+      }
+      .editor-header {
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 0 15px;
+        border-bottom: 1px solid var(--editor-border);
+        background: var(--editor-head);
+      }
+      .editor-controls {
+        display: inline-flex;
+        flex: none;
+        align-items: center;
+        gap: 6px;
+      }
+      .editor-controls i {
+        width: 7px;
+        height: 7px;
+        border: 1px solid var(--editor-muted);
+        border-radius: 50%;
+        opacity: 0.72;
+      }
+      .editor-tab {
+        min-width: 0;
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        overflow: hidden;
+        color: var(--editor-text);
+        font: 500 12px/1.4 var(--mono);
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .file-mark {
+        width: 9px;
+        height: 12px;
+        flex: none;
+        border: 1px solid var(--editor-keyword);
+        border-radius: 2px;
+      }
+      .editor-language {
+        flex: none;
+        color: var(--editor-muted);
+        font: 500 10px/1.4 var(--mono);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .code-scroll {
+        max-width: 100%;
+        overflow-x: auto;
+        overscroll-behavior-inline: contain;
+        scrollbar-color: var(--editor-muted) transparent;
+      }
+      .code-scroll:focus-visible {
+        outline-offset: -4px;
+      }
+      .code-editor pre {
+        width: max-content;
+        min-width: 100%;
+        margin: 0;
+        padding: 17px 17px 16px;
+        color: var(--editor-text);
+        font: 400 12px/1.64 var(--mono);
+        tab-size: 4;
+        white-space: pre;
+      }
+      .code-editor code {
+        font: inherit;
+      }
+      .code-line {
+        display: block;
+        min-height: 1.64em;
+        white-space: pre;
+      }
+      .line-number {
+        display: inline-block;
+        width: 2em;
+        margin-right: 1.05em;
+        color: var(--editor-muted);
+        font-size: 0.85em;
+        text-align: right;
+        user-select: none;
+      }
+      .java-keyword {
+        color: var(--editor-keyword);
+      }
+      .java-type {
+        color: var(--editor-type);
+      }
+      .java-string {
+        color: var(--editor-string);
+      }
+      .java-ident {
+        color: var(--editor-ident);
+      }
+      .editor-caption {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 10px 16px;
+        border-top: 1px solid var(--editor-border);
+        color: var(--editor-muted);
+        font: 450 11px/1.5 var(--mono);
+      }
+      .editor-caption span:last-child {
+        color: var(--editor-keyword);
+        text-align: right;
+      }
+      body:has(#light-preview:checked) .orbit-art {
+        opacity: 0.62;
+      }
+      .art-label {
+        position: absolute;
+        z-index: 3;
+        top: 2%;
+        right: 2%;
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        padding: 11px 14px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: var(--surface);
+        color: var(--body);
+        box-shadow: 0 14px 40px rgb(0 0 0 / 20%);
+      }
+      .art-label b {
+        color: var(--green);
+        font-weight: 600;
+      }
+      .hero-note {
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        margin-top: 47px;
+        padding-top: 15px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+      }
+      .hero-note span {
+        font: 550 10px/1.5 var(--mono);
+        letter-spacing: 0.04em;
+      }
+      .section {
+        position: relative;
+        padding: clamp(70px, 8vw, 106px) 0;
+        border-top: 1px solid var(--line);
+      }
+      .section-head {
+        display: grid;
+        grid-template-columns: minmax(155px, 2fr) minmax(0, 7fr) minmax(180px, 3fr);
+        gap: 24px;
+        align-items: start;
+        margin-bottom: 40px;
+      }
+      .section-label {
+        padding-top: 8px;
+      }
+      .section-label b {
+        margin-right: 9px;
+        color: var(--green);
+        font-weight: 600;
+      }
+      .section-head h2 {
+        margin: 0;
+        font-size: clamp(33px, 4.2vw, 54px);
+        font-weight: 600;
+        line-height: 1.03;
+        letter-spacing: -0.05em;
+      }
+      .section-head > p {
+        max-width: 260px;
+        margin: 5px 0 0;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.65;
+      }
+      .story-list {
+        display: grid;
+        gap: 17px;
+      }
+      .story {
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+        min-height: 290px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 17px;
+        background: var(--surface);
+      }
+      .story:nth-child(even) .story-art {
+        order: 2;
+      }
+      .story-art {
+        position: relative;
+        min-height: 260px;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        background: var(--surface-2);
+      }
+      .story-art::before {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 50% 50%, rgb(61 220 151 / 17%), transparent 58%);
+        content: '';
+      }
+      .story-glyph {
+        position: relative;
+        width: 64%;
+        height: 120px;
+        border-top: 1px solid rgb(110 202 195 / 75%);
+        border-bottom: 1px solid rgb(61 220 151 / 55%);
+        transform: skewY(-11deg);
+      }
+      .story-glyph::before,
+      .story-glyph::after {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: rgb(110 202 195 / 45%);
+        content: '';
+        transform: rotate(22deg);
+      }
+      .story-glyph::after {
+        transform: rotate(-22deg);
+        background: rgb(61 220 151 / 50%);
+      }
+      .story:nth-child(even) .story-glyph {
+        width: 48%;
+        height: 150px;
+        border-radius: 50%;
+        transform: rotate(-28deg);
+      }
+      .story-copy {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: clamp(24px, 4vw, 45px);
+      }
+      .story-meta {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 22px;
+      }
+      .story-meta .meta:first-child {
+        color: var(--green);
+      }
+      .story h3 {
+        margin: 0 0 11px;
+        font-size: clamp(25px, 3vw, 37px);
+        font-weight: 600;
+        line-height: 1.08;
+        letter-spacing: -0.05em;
+      }
+      .story-copy > p {
+        margin-bottom: 15px;
+        color: var(--body);
+        font-size: 14px;
+        line-height: 1.7;
+      }
+      .story-copy .responsibility {
+        margin: 0;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.6;
+      }
+      .stackline {
+        margin: 18px 0 0;
+        color: var(--teal);
+        font: 450 11px/1.7 var(--mono);
+      }
+      .expertise-list {
+        border-top: 1px solid var(--line);
+      }
+      .expertise-row {
+        display: grid;
+        grid-template-columns: 70px minmax(210px, 3fr) minmax(0, 7fr) minmax(120px, 2fr);
+        align-items: baseline;
+        gap: 20px;
+        padding: 22px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .expertise-row .number {
+        color: var(--green);
+        font: 500 12px/1.4 var(--mono);
+      }
+      .expertise-row h3 {
+        margin: 0;
+        font: 600 20px/1.2 var(--display);
+      }
+      .expertise-row p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.6;
+      }
+      .expertise-row .examples {
+        color: var(--teal);
+        font: 400 10px/1.6 var(--mono);
+      }
+      .about-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+        gap: clamp(30px, 7vw, 100px);
+        align-items: start;
+      }
+      .about-statement {
+        color: var(--green);
+        font-size: 13px;
+        font-weight: 650;
+      }
+      .about-grid h2 {
+        margin: 13px 0 0;
+        font-size: clamp(32px, 4vw, 51px);
+        font-weight: 600;
+        line-height: 1.05;
+        letter-spacing: -0.05em;
+      }
+      .about-copy p {
+        color: var(--body);
+        font-size: 15px;
+        line-height: 1.8;
+      }
+      .about-copy p:last-child {
+        margin-bottom: 0;
+      }
+      .history {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 17px;
+      }
+      .history article {
+        padding: 22px 0 0;
+        border-top: 1px solid var(--line);
+      }
+      .history .meta {
+        display: block;
+        margin-bottom: 15px;
+      }
+      .history h3 {
+        margin: 0 0 7px;
+        font-size: 15px;
+        font-weight: 650;
+      }
+      .history p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.6;
+      }
+      .extra-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 17px;
+      }
+      .extra-card {
+        position: relative;
+        min-height: 205px;
+        padding: 25px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: var(--surface);
+      }
+      .extra-card::after {
+        position: absolute;
+        top: 20px;
+        right: 22px;
+        width: 40px;
+        height: 40px;
+        border: 1px solid var(--line);
+        border-radius: 50%;
+        background: radial-gradient(circle, rgb(61 220 151 / 16%), transparent 70%);
+        content: '';
+      }
+      .extra-card .meta {
+        display: block;
+        margin-bottom: 18px;
+        color: var(--green);
+      }
+      .extra-card h3 {
+        max-width: 390px;
+        margin: 0 0 10px;
+        font: 600 24px/1.15 var(--display);
+      }
+      .extra-card p {
+        max-width: 490px;
+        margin: 0;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.65;
+      }
+      .extra-card p.extra-link {
+        margin-top: 16px;
+      }
+      .extra-links {
+        display: grid;
+        margin: 17px 0 12px;
+      }
+      .extra-links a {
+        min-height: 50px;
+        display: grid;
+        align-content: center;
+        gap: 4px;
+        padding: 9px 36px 9px 0;
+        border-top: 1px solid var(--line);
+        color: var(--text);
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 1.4;
+        text-decoration: none;
+      }
+      .extra-links a span {
+        color: var(--muted);
+        font-size: 10px;
+        font-weight: 500;
+      }
+      .status {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 5px 8px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        color: var(--green);
+        font: 500 10px/1.3 var(--mono);
+        text-transform: uppercase;
+      }
+      .cert-list {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 15px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .cert-list li {
+        padding: 17px 0;
+        border-top: 1px solid var(--line);
+      }
+      .cert-list time {
+        display: block;
+        margin-bottom: 9px;
+        color: var(--green);
+        font: 500 11px/1.4 var(--mono);
+      }
+      .cert-list strong {
+        display: block;
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      .contact {
+        position: relative;
+        overflow: hidden;
+        padding: 64px 0;
+        border-top: 1px solid var(--line);
+        background: var(--surface);
+      }
+      .contact::after {
+        position: absolute;
+        right: -130px;
+        bottom: -220px;
+        width: 440px;
+        height: 440px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgb(61 220 151 / 10%), transparent 69%);
+        content: '';
+        pointer-events: none;
+      }
+      .contact-row {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 35px;
+      }
+      .contact .section-label {
+        margin-bottom: 14px;
+        color: var(--green);
+      }
+      .contact h2 {
+        max-width: 650px;
+        margin: 0;
+        font-size: clamp(34px, 4.2vw, 53px);
+        font-weight: 600;
+        line-height: 1.02;
+        letter-spacing: -0.05em;
+      }
+      .contact-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px 22px;
+      }
+      .contact-links a {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        color: var(--body);
+        font-size: 13px;
+        font-weight: 650;
+      }
+      .footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 19px 0;
+        color: var(--muted);
+        font-size: 11px;
+      }
+      .footer p {
+        margin: 0;
+      }
+      @keyframes float-shape {
+        from {
+          transform: translate3d(0, 0, 0) rotate(-1deg);
+        }
+        to {
+          transform: translate3d(0, -8px, 0) rotate(1deg);
+        }
+      }
+      @media (max-width: 1000px) {
+        .container {
+          width: min(calc(100% - 48px), var(--max));
+        }
+        .header-row {
+          min-height: 70px;
+        }
+        .desktop-nav {
+          gap: 14px;
+        }
+        .hero-grid {
+          grid-template-columns: minmax(0, 1fr) minmax(330px, 0.95fr);
+          gap: 30px;
+        }
+        .section-head {
+          grid-template-columns: 135px 1fr;
+        }
+        .section-head > p {
+          grid-column: 2;
+          margin-top: -7px;
+        }
+        .expertise-row {
+          grid-template-columns: 48px minmax(190px, 3fr) minmax(0, 7fr);
+        }
+        .expertise-row .examples {
+          grid-column: 2 / -1;
+        }
+      }
+      @media (max-width: 920px) {
+        .hero-grid {
+          grid-template-columns: 1fr;
+          gap: 25px;
+        }
+        .hero-art-composition {
+          width: min(100%, 680px);
+          min-height: 555px;
+          margin-inline: auto;
+        }
+      }
+      @media (max-width: 760px) {
+        .container {
+          width: min(calc(100% - 40px), var(--max));
+        }
+        .header-row {
+          min-height: 67px;
+          flex-wrap: wrap;
+          padding-block: 10px;
+        }
+        .desktop-nav {
+          display: none;
+        }
+        .menu {
+          position: relative;
+          display: block;
+        }
+        .menu summary {
+          min-width: 48px;
+          min-height: 44px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0 11px;
+          border: 1px solid var(--control-line);
+          border-radius: 999px;
+          color: var(--text);
+          cursor: pointer;
+          font-size: 13px;
+          font-weight: 650;
+          list-style: none;
+        }
+        .menu summary::-webkit-details-marker {
+          display: none;
+        }
+        .menu nav {
+          position: absolute;
+          top: calc(100% + 8px);
+          right: 0;
+          width: min(280px, calc(100vw - 32px));
+          display: grid;
+          padding: 9px;
+          border: 1px solid var(--line);
+          border-radius: 12px;
+          background: var(--surface);
+          box-shadow: 0 18px 42px rgb(0 0 0 / 25%);
+        }
+        .menu nav a {
+          min-height: 44px;
+          display: flex;
+          align-items: center;
+          padding: 0 12px;
+        }
+        .hero-foot {
+          margin-top: 28px;
+        }
+        .section-head {
+          display: block;
+          margin-bottom: 30px;
+        }
+        .section-head h2 {
+          margin-top: 13px;
+        }
+        .section-head > p {
+          max-width: 520px;
+          margin-top: 11px;
+        }
+        .story {
+          grid-template-columns: 1fr;
+        }
+        .story-art,
+        .story:nth-child(even) .story-art {
+          order: 0;
+          min-height: 205px;
+        }
+        .story-copy {
+          padding: 25px;
+        }
+        .expertise-row {
+          grid-template-columns: 44px minmax(0, 1fr);
+          gap: 7px 16px;
+        }
+        .expertise-row p,
+        .expertise-row .examples {
+          grid-column: 2;
+        }
+        .about-grid {
+          grid-template-columns: 1fr;
+          gap: 22px;
+        }
+        .contact-row {
+          align-items: start;
+          flex-direction: column;
+        }
+      }
+      @media (max-width: 540px) {
+        .container {
+          width: min(calc(100% - 32px), var(--max));
+        }
+        .brand-mark {
+          width: 36px;
+          height: 36px;
+        }
+        .brand-name {
+          font-size: 13px;
+        }
+        .brand-name small {
+          font-size: 10px;
+        }
+        .cv-button {
+          padding: 0 10px;
+          font-size: 12px;
+        }
+        .hero {
+          padding-top: 52px;
+        }
+        h1 {
+          font-size: clamp(44px, 12vw, 60px);
+        }
+        .intro {
+          font-size: 16px;
+        }
+        .roleline {
+          gap: 8px 11px;
+        }
+        .roleline span + span::before {
+          margin-right: 10px;
+        }
+        .hero-art-composition {
+          min-height: 0;
+          padding: 44px 0 18px;
+          margin: -5px -8px 0;
+        }
+        .geometry-backdrop {
+          opacity: 0.72;
+        }
+        .orbit-art {
+          width: 118%;
+          max-width: 460px;
+        }
+        .orbit-guide {
+          display: none;
+        }
+        .code-editor {
+          width: 100%;
+          max-width: 440px;
+        }
+        .code-editor pre {
+          padding-inline: 12px;
+          font-size: 12px;
+        }
+        .art-label {
+          top: 0;
+          right: 1%;
+          padding: 7px 9px;
+          font-size: 9px;
+        }
+        .hero-foot {
+          align-items: start;
+          flex-direction: column;
+          gap: 7px;
+        }
+        .section {
+          padding: 62px 0;
+        }
+        .story-art,
+        .story:nth-child(even) .story-art {
+          min-height: 170px;
+        }
+        .story-copy {
+          padding: 21px;
+        }
+        .story-meta {
+          margin-bottom: 16px;
+        }
+        .history,
+        .extra-grid,
+        .cert-list {
+          grid-template-columns: 1fr;
+        }
+        .history {
+          gap: 0;
+        }
+        .history article {
+          padding: 17px 0;
+        }
+        .extra-card {
+          min-height: auto;
+          padding: 21px;
+        }
+        .contact {
+          padding: 50px 0;
+        }
+        .contact-links {
+          gap: 14px 19px;
+        }
+        .footer {
+          flex-direction: column;
+        }
+      }
+      @media (max-width: 360px) {
+        .brand-name small {
+          display: none;
+        }
+        .nav-row {
+          gap: 9px;
+        }
+        .hero-art-composition {
+          padding-top: 42px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+        }
+        .orbit-art {
+          animation: none !important;
+          transform: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="preview-bar">
+      <label for="light-preview"
+        ><input id="light-preview" type="checkbox" /> Preview light theme</label
+      >
+    </div>
+    <div class="page">
+      <a class="skip" href="#main">Skip to content</a>
+      <header class="header">
+        <div class="container header-row">
+          <a class="brand" href="#top" aria-label="Jurol James portfolio concept home">
+            <span class="brand-mark" aria-hidden="true"
+              ><img src="../public/favicon.svg" alt="" width="144" height="144"
+            /></span>
+            <span class="brand-name"
+              >Jurol James<small>Senior Engineer · Technical Lead</small></span
+            >
+          </a>
+          <div class="nav-row">
+            <nav class="desktop-nav" aria-label="Primary navigation">
+              <a href="#work">Work</a><a href="#expertise">Expertise</a
+              ><a href="#experience">Experience</a><a href="https://blog.jurolc.com">Blog</a
+              ><a href="#contact">Contact</a>
+            </nav>
+            <details class="menu">
+              <summary>Menu</summary>
+              <nav aria-label="Mobile navigation">
+                <a href="#work">Featured work</a><a href="#expertise">Technical expertise</a
+                ><a href="#experience">Experience</a
+                ><a href="https://blog.jurolc.com">Engineering blog</a
+                ><a href="#contact">Contact</a>
+              </nav>
+            </details>
+            <a class="cv-button" href="https://jurolc.com/cv/Jurol-James-Cabaluna-CV.pdf"
+              >Download CV ↗</a
+            >
+          </div>
+        </div>
+      </header>
+      <main id="main">
+        <section class="hero" id="top" aria-labelledby="hero-title">
+          <div class="container hero-grid">
+            <div class="hero-copy">
+              <p class="eyebrow">
+                <span class="eyebrow-mark" aria-hidden="true"></span>Senior Software Engineer ·
+                Technical Lead
+              </p>
+              <h1 id="hero-title">Thoughtful engineering for <span>complex systems.</span></h1>
+              <p class="intro">
+                More than 10 years building enterprise software, with Java and Spring Boot at the
+                core. I bring full-stack range in React and TypeScript, and hands-on technical
+                direction to integrations and operational systems.
+              </p>
+              <div class="roleline">
+                <span>Java / Spring Boot</span><span>React / TypeScript</span
+                ><span>Enterprise integrations</span>
+              </div>
+              <div class="actions">
+                <a class="button" href="#work"
+                  >Explore selected work <span aria-hidden="true">↘</span></a
+                ><a class="text-link" href="#contact">Contact ↗</a>
+              </div>
+            </div>
+            <div class="hero-art-composition">
+              <div class="geometry-backdrop" aria-hidden="true">
+                <div class="visual-glow"></div>
+                <svg class="orbit-art" viewBox="0 0 600 520" fill="none" focusable="false">
+                  <defs>
+                    <linearGradient
+                      id="flow-one"
+                      x1="104"
+                      y1="72"
+                      x2="496"
+                      y2="445"
+                      gradientUnits="userSpaceOnUse"
+                    >
+                      <stop stop-color="#6ECAC3" />
+                      <stop offset=".52" stop-color="#3DDC97" />
+                      <stop offset="1" stop-color="#6ECAC3" stop-opacity=".2" />
+                    </linearGradient>
+                    <linearGradient
+                      id="flow-two"
+                      x1="74"
+                      y1="433"
+                      x2="523"
+                      y2="86"
+                      gradientUnits="userSpaceOnUse"
+                    >
+                      <stop stop-color="#3DDC97" stop-opacity=".15" />
+                      <stop offset=".5" stop-color="#6ECAC3" />
+                      <stop offset="1" stop-color="#3DDC97" />
+                    </linearGradient>
+                    <radialGradient id="core">
+                      <stop stop-color="#6ECAC3" stop-opacity=".3" />
+                      <stop offset="1" stop-color="#6ECAC3" stop-opacity="0" />
+                    </radialGradient>
+                  </defs>
+                  <circle
+                    class="orbit-guide"
+                    cx="303"
+                    cy="260"
+                    r="185"
+                    stroke="#98A4B3"
+                    stroke-opacity=".16"
+                  />
+                  <circle
+                    class="orbit-guide"
+                    cx="303"
+                    cy="260"
+                    r="145"
+                    stroke="#98A4B3"
+                    stroke-opacity=".12"
+                    stroke-dasharray="3 9"
+                  />
+                  <path
+                    class="orbit-line"
+                    d="M74 281C115 157 204 112 300 207C385 290 443 355 526 205"
+                    stroke="url(#flow-one)"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                  <path
+                    class="orbit-line"
+                    d="M69 335C149 409 226 385 303 296C394 192 450 125 534 176"
+                    stroke="url(#flow-two)"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                  <path
+                    class="orbit-secondary-line"
+                    d="M112 145C188 236 240 319 310 323C382 327 418 266 488 357"
+                    stroke="#6ECAC3"
+                    stroke-opacity=".48"
+                    stroke-width="1.4"
+                    stroke-linecap="round"
+                  />
+                  <circle cx="303" cy="260" r="104" fill="url(#core)" />
+                  <circle
+                    class="orbit-core"
+                    cx="303"
+                    cy="260"
+                    r="39"
+                    fill="#141B23"
+                    stroke="#6ECAC3"
+                    stroke-opacity=".7"
+                  />
+                  <circle cx="303" cy="260" r="7" fill="#3DDC97" />
+                  <circle cx="74" cy="281" r="5" fill="#6ECAC3" />
+                  <circle cx="526" cy="205" r="5" fill="#3DDC97" />
+                  <circle cx="69" cy="335" r="4" fill="#3DDC97" />
+                  <circle cx="534" cy="176" r="4" fill="#6ECAC3" />
+                  <circle cx="488" cy="357" r="4" fill="#6ECAC3" />
+                </svg>
+              </div>
+              <span class="art-label"><b>ENGINEERING</b> · systems in motion</span>
+              <figure class="code-editor" aria-labelledby="person-filename">
+                <div class="editor-header">
+                  <span class="editor-controls" aria-hidden="true"><i></i><i></i><i></i></span>
+                  <span class="editor-tab" id="person-filename"
+                    ><span class="file-mark" aria-hidden="true"></span>Person.java</span
+                  >
+                  <span class="editor-language">Java</span>
+                </div>
+                <div
+                  class="code-scroll"
+                  role="region"
+                  aria-label="Java source code for Person.java"
+                  tabindex="0"
+                >
+                  <pre><code><span class="code-line"><span class="line-number" aria-hidden="true">1</span><span class="java-keyword">public final class</span> <span class="java-type">Person</span> {</span><span class="code-line"><span class="line-number" aria-hidden="true">2</span></span><span class="code-line"><span class="line-number" aria-hidden="true">3</span>    <span class="java-keyword">private final</span> <span class="java-type">String</span> <span class="java-ident">name</span> = <span class="java-string">"Jurol James"</span>;</span><span class="code-line"><span class="line-number" aria-hidden="true">4</span></span><span class="code-line"><span class="line-number" aria-hidden="true">5</span>    <span class="java-keyword">private final</span> <span class="java-type">String</span> <span class="java-ident">role</span> =</span><span class="code-line"><span class="line-number" aria-hidden="true">6</span>            <span class="java-string">"Senior Software Engineer"</span>;</span><span class="code-line"><span class="line-number" aria-hidden="true">7</span></span><span class="code-line"><span class="line-number" aria-hidden="true">8</span>    <span class="java-keyword">private final</span> <span class="java-type">String</span> <span class="java-ident">experience</span> = <span class="java-string">"10+ years"</span>;</span><span class="code-line"><span class="line-number" aria-hidden="true">9</span></span><span class="code-line"><span class="line-number" aria-hidden="true">10</span>    <span class="java-keyword">private final</span> <span class="java-type">String[]</span> <span class="java-ident">expertise</span> = {</span><span class="code-line"><span class="line-number" aria-hidden="true">11</span>        <span class="java-string">"Java &amp; Spring Boot"</span>,</span><span class="code-line"><span class="line-number" aria-hidden="true">12</span>        <span class="java-string">"React &amp; TypeScript"</span>,</span><span class="code-line"><span class="line-number" aria-hidden="true">13</span>        <span class="java-string">"System Architecture"</span>,</span><span class="code-line"><span class="line-number" aria-hidden="true">14</span>        <span class="java-string">"Enterprise Integrations"</span></span><span class="code-line"><span class="line-number" aria-hidden="true">15</span>    };</span><span class="code-line"><span class="line-number" aria-hidden="true">16</span></span><span class="code-line"><span class="line-number" aria-hidden="true">17</span>    <span class="java-keyword">private final</span> <span class="java-type">String</span> <span class="java-ident">passion</span> =</span><span class="code-line"><span class="line-number" aria-hidden="true">18</span>            <span class="java-string">"Building reliable software"</span>;</span><span class="code-line"><span class="line-number" aria-hidden="true">19</span>}</span></code></pre>
+                </div>
+                <figcaption class="editor-caption">
+                  <span>Illustrative Java profile class</span><span>Static source preview</span>
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+          <div class="container hero-note">
+            <span>BACKEND DEPTH · FULL-STACK RANGE · TECHNICAL OWNERSHIP</span
+            ><span>10+ YEARS IN SOFTWARE ENGINEERING</span>
+          </div>
+        </section>
+
+        <section class="section" id="work" aria-labelledby="work-title">
+          <div class="container">
+            <div class="section-head">
+              <p class="section-label"><b>01</b> Selected work</p>
+              <h2 id="work-title">Engineering that meets the real world.</h2>
+              <p>
+                Case studies built from verified public experience—not fabricated product
+                screenshots.
+              </p>
+            </div>
+            <div class="story-list">
+              <article class="story">
+                <div class="story-art" aria-hidden="true"><span class="story-glyph"></span></div>
+                <div class="story-copy">
+                  <div class="story-meta">
+                    <span class="meta">CoDev · Tellworks · AIMSPlus+</span
+                    ><span class="meta">Warehouse / logistics</span>
+                  </div>
+                  <h3>Making operational workflows work together.</h3>
+                  <p>
+                    Services, integrations, data workflows, and web features for warehouse and
+                    logistics applications, across assigned modules from design through delivery.
+                  </p>
+                  <p class="responsibility">
+                    <strong>Engineering scope:</strong> Java / Spring services, REST APIs, data
+                    access, React / TypeScript features, and selected event-driven integration work.
+                  </p>
+                  <p class="stackline">Java · Spring Boot · PostgreSQL · Azure Service Bus</p>
+                </div>
+              </article>
+              <article class="story">
+                <div class="story-art" aria-hidden="true"><span class="story-glyph"></span></div>
+                <div class="story-copy">
+                  <div class="story-meta">
+                    <span class="meta">NEC · IaMS · MMS</span
+                    ><span class="meta">IoT / smart factory</span>
+                  </div>
+                  <h3>Monitoring signals, movement, and materials.</h3>
+                  <p>
+                    Full-stack monitoring and material-management applications connected device data
+                    with integrated systems, map-based visualization, and operational traceability.
+                  </p>
+                  <p class="responsibility">
+                    <strong>Engineering scope:</strong> Led an eight-person team on IaMS from
+                    requirements and technical design through implementation and delivery.
+                  </p>
+                  <p class="stackline">Java · TypeScript · React · MongoDB · Leaflet · Turf.js</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="expertise" aria-labelledby="expertise-title">
+          <div class="container">
+            <div class="section-head">
+              <p class="section-label"><b>02</b> Expertise</p>
+              <h2 id="expertise-title">Connected skills, not isolated badges.</h2>
+              <p>Technical areas brought together in enterprise application work.</p>
+            </div>
+            <div class="expertise-list">
+              <article class="expertise-row">
+                <span class="number">01</span>
+                <h3>Backend &amp; APIs</h3>
+                <p>
+                  Java and Spring Boot services, REST interfaces, persistence, and application
+                  security.
+                </p>
+                <span class="examples">JAVA · SPRING · REST</span>
+              </article>
+              <article class="expertise-row">
+                <span class="number">02</span>
+                <h3>Integrations &amp; data</h3>
+                <p>
+                  External systems, data workflows, event-driven integration work, and operational
+                  processes.
+                </p>
+                <span class="examples">EVENTS · DATA · SYSTEMS</span>
+              </article>
+              <article class="expertise-row">
+                <span class="number">03</span>
+                <h3>Frontend delivery</h3>
+                <p>
+                  React and TypeScript features delivered alongside service and workflow design.
+                </p>
+                <span class="examples">REACT · TYPESCRIPT</span>
+              </article>
+              <article class="expertise-row">
+                <span class="number">04</span>
+                <h3>Technical direction</h3>
+                <p>
+                  Module ownership, design choices, code review, troubleshooting, and team
+                  coordination.
+                </p>
+                <span class="examples">DESIGN · DELIVERY</span>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="about" aria-labelledby="about-title">
+          <div class="container about-grid">
+            <div>
+              <p class="about-statement">ABOUT / APPROACH</p>
+              <h2 id="about-title">Implementation details, with the whole system in view.</h2>
+            </div>
+            <div class="about-copy">
+              <p>
+                I design and build enterprise applications across ERP, warehouse and logistics, IoT
+                monitoring, and system integration. My work spans backend services, data models,
+                APIs, and user interfaces.
+              </p>
+              <p>
+                I enjoy solving complex application problems while helping teams choose approaches
+                they can maintain. My recent work includes assigned-module technical direction,
+                integration initiatives, code review, and delivery coordination; earlier, I led a
+                development team on an IoT monitoring platform.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="experience" aria-labelledby="experience-title">
+          <div class="container">
+            <div class="section-head">
+              <p class="section-label"><b>03</b> Experience</p>
+              <h2 id="experience-title">A decade of building across teams and domains.</h2>
+              <p>A concise chronology supports the featured project stories.</p>
+            </div>
+            <div class="history">
+              <article>
+                <span class="meta">Jul 2022 — Present</span>
+                <h3>Senior Java Developer · CoDev</h3>
+                <p>Warehouse/logistics applications and enterprise integrations.</p>
+              </article>
+              <article>
+                <span class="meta">Feb 2018 — Jul 2022</span>
+                <h3>Software Senior Engineer · NEC</h3>
+                <p>IoT monitoring, material systems, and team leadership.</p>
+              </article>
+              <article>
+                <span class="meta">2016 — 2018</span>
+                <h3>Earlier engineering roles</h3>
+                <p>
+                  Geckotech, Spingine, and I-Resource; the source portfolio records each role and
+                  date.
+                </p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="independent" aria-labelledby="independent-title">
+          <div class="container">
+            <div class="section-head">
+              <p class="section-label"><b>04</b> Beyond the day job</p>
+              <h2 id="independent-title">Independent work and technical writing.</h2>
+              <p>Exploration is labeled clearly; published writing links to the blog.</p>
+            </div>
+            <div class="extra-grid">
+              <article class="extra-card">
+                <span class="meta">Java · independent project</span>
+                <h3>Zerp Quantum Crypto</h3>
+                <p>
+                  An experimental library exploring hybrid post-quantum encryption and agentic
+                  software development.
+                </p>
+                <span class="status"
+                  >Experimental · not production cryptographic infrastructure</span
+                >
+                <p class="extra-link">
+                  <a
+                    href="https://central.sonatype.com/artifact/io.github.jurol-james/zerp-quantum-crypto"
+                    >Maven Central artifact ↗</a
+                  >
+                </p>
+              </article>
+              <article class="extra-card">
+                <span class="meta">Engineering Notes · Blog</span>
+                <h3>Technical ideas, explained.</h3>
+                <p>
+                  Selected Engineering Notes on quantum computing and post-quantum cryptography.
+                </p>
+                <nav class="extra-links" aria-label="Featured Engineering Notes articles">
+                  <a href="https://blog.jurolc.com/posts/quantum-circuits-and-interference/">
+                    Quantum Circuits and Interference
+                    <span>Quantum Computing Fundamentals · Part 4</span>
+                  </a>
+                  <a
+                    href="https://blog.jurolc.com/posts/slh-dsa-hash-based-post-quantum-signatures/"
+                  >
+                    SLH-DSA: Understanding Hash-Based Signatures
+                    <span>Post-Quantum Cryptography · Part 5</span>
+                  </a>
+                </nav>
+                <p class="extra-link">
+                  <a href="https://blog.jurolc.com/posts/">Browse Engineering Notes ↗</a>
+                </p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="credentials" aria-labelledby="credentials-title">
+          <div class="container">
+            <div class="section-head">
+              <p class="section-label"><b>05</b> Credentials</p>
+              <h2 id="credentials-title">Selected certifications.</h2>
+              <p>Keep credentials quiet and easy to scan.</p>
+            </div>
+            <ul class="cert-list">
+              <li>
+                <time datetime="2019">2019</time><strong>Linux Essentials Examination</strong>
+              </li>
+              <li>
+                <time datetime="2019">2019</time
+                ><strong>PhilNITS Fundamental Engineering Examination</strong>
+              </li>
+              <li>
+                <time datetime="2025">2025</time
+                ><strong>Generative AI for Software Development</strong>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="contact" id="contact" aria-labelledby="contact-title">
+          <div class="container contact-row">
+            <div>
+              <p class="section-label">06 / Contact</p>
+              <h2 id="contact-title">Let’s talk about building software that lasts.</h2>
+            </div>
+            <nav class="contact-links" aria-label="Contact and profile links">
+              <a href="mailto:greenmachinedisposer@gmail.com">Email ↗</a
+              ><a href="https://www.linkedin.com/in/jurol/">LinkedIn ↗</a
+              ><a href="https://github.com/jurol-james">GitHub ↗</a
+              ><a href="https://blog.jurolc.com">Blog ↗</a>
+            </nav>
+          </div>
+        </section>
+      </main>
+      <footer class="container footer">
+        <p>© Jurol James R. Cabaluna · Concept B</p>
+        <p>Midnight Developer / Creative Engineering</p>
+      </footer>
+    </div>
+  </body>
+</html>

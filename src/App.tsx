@@ -1,191 +1,292 @@
 import { SpeedInsights } from '@vercel/speed-insights/react'
-import { Header } from './components/Header'
-import { SectionHeading } from './components/SectionHeading'
-import { ExperienceCard } from './components/ExperienceCard'
-import { ProjectCard } from './components/ProjectCard'
 import { ContactIcon } from './components/ContactIcon'
+import { ExperienceCard } from './components/ExperienceCard'
+import { Header } from './components/Header'
+import { HeroGeometry } from './components/HeroGeometry'
+import { PersonCodePanel } from './components/PersonCodePanel'
 import { ProfessionalJourney } from './components/ProfessionalJourney'
-import { profile } from './data/profile'
-import { focusAreas, interests, skillGroups } from './data/skills'
-import { earlierCareer, experience } from './data/experience'
-import { projects } from './data/projects'
+import { ProjectCard } from './components/ProjectCard'
+import { SectionHeading } from './components/SectionHeading'
 import { certifications } from './data/certifications'
+import { earlierCareer, experience } from './data/experience'
+import { profile } from './data/profile'
+import { projects } from './data/projects'
+import { interests, skillGroups } from './data/skills'
+
+const featuredWork = [
+  {
+    company: 'CoDev · Tellworks · AIMSPlus+',
+    domain: 'Warehouse / logistics',
+    title: 'Making operational workflows work together.',
+    summary: experience[0].engagements?.[0].description ?? experience[0].summary,
+    scope:
+      'Java and Spring Boot services, REST APIs, React and TypeScript features, PostgreSQL data access, and selected event-driven integration work.',
+    technologies: ['Java', 'Spring Boot', 'PostgreSQL', 'Azure Service Bus'],
+  },
+  {
+    company: 'NEC · IaMS · MMS',
+    domain: 'IoT / smart factory',
+    title: 'Monitoring signals, movement, and materials.',
+    summary: experience[1].engagements?.[0].description ?? experience[1].summary,
+    scope:
+      'Full-stack implementation across connected-device data, integrated systems, and map-based visualization, with team leadership from requirements through delivery.',
+    technologies: ['Java', 'React', 'TypeScript', 'MongoDB', 'Leaflet'],
+  },
+]
+
+const blogArticles = [
+  {
+    title: 'Quantum Circuits and Interference',
+    series: 'Quantum Computing Fundamentals · Part 4',
+    href: 'https://blog.jurolc.com/posts/quantum-circuits-and-interference/',
+  },
+  {
+    title: 'SLH-DSA: Understanding Hash-Based Signatures',
+    series: 'Post-Quantum Cryptography · Part 5',
+    href: 'https://blog.jurolc.com/posts/slh-dsa-hash-based-post-quantum-signatures/',
+  },
+]
 
 function App() {
   return (
-    <>
+    <div className="page">
       <a className="skip-link" href="#main">
         Skip to content
       </a>
       <Header />
-      <main id="main">
-        <section className="hero" id="top" aria-labelledby="hero-title">
+      <main id="main" tabIndex={-1}>
+        <section className="hero" id="top" aria-labelledby="hero-title" tabIndex={-1}>
           <div className="container hero-grid">
             <div className="hero-copy">
-              <p className="eyebrow hero-eyebrow">
-                <span className="eyebrow-line" />
+              <p className="eyebrow">
+                <span className="eyebrow-mark" aria-hidden="true" />
                 {profile.eyebrow}
               </p>
               <h1 id="hero-title">
-                {profile.headline.lead} <em>{profile.headline.emphasis}</em>{' '}
-                {profile.headline.close}
+                I build <span>reliable software</span> for complex operations.
               </h1>
-              <p className="hero-intro">{profile.introduction}</p>
-              <div className="hero-actions">
-                <a className="button button-primary" href="#experience">
-                  Explore my work <span aria-hidden="true">↗</span>
+              <p className="intro">{profile.introduction}</p>
+              <div className="roleline" aria-label="Engineering specialties">
+                <span>Java / Spring Boot</span>
+                <span>React / TypeScript</span>
+                <span>Enterprise integrations</span>
+              </div>
+              <div className="actions">
+                <a className="button" href="#work">
+                  Explore selected work <span aria-hidden="true">↘</span>
                 </a>
                 <a className="text-link" href="#contact">
-                  Get in touch <span aria-hidden="true">↗</span>
+                  Contact <span aria-hidden="true">↗</span>
                 </a>
               </div>
             </div>
-            <div className="hero-aside" role="group" aria-label="Professional overview">
-              <div className="hero-aside-top">
-                <span>ENGINEERING SNAPSHOT</span>
-                <span>01 / 03</span>
-              </div>
-              <div className="hero-aside-main">
-                <strong>
-                  10<span>+</span>
-                </strong>
-                <span>
-                  years building
-                  <br />
-                  enterprise software
-                </span>
-              </div>
-              <div className="hero-aside-bottom">
-                <div>
-                  <span>CORE</span>
-                  <strong>Java / Spring Boot</strong>
-                </div>
-                <div>
-                  <span>ALSO</span>
-                  <strong>React / TypeScript</strong>
-                </div>
-                <div>
-                  <span>FOCUS</span>
-                  <strong>Logistics & integrations</strong>
-                </div>
-              </div>
+            <div className="hero-art-composition">
+              <HeroGeometry />
+              <PersonCodePanel />
+              <span className="art-label">
+                <b>ENGINEERING</b> · systems in motion
+              </span>
             </div>
           </div>
-          <div className="container hero-footnote">
-            <span>BACKEND DEPTH. FULL-STACK RANGE. TECHNICAL OWNERSHIP.</span>
-            <span>SCROLL TO EXPLORE ↓</span>
+          <div className="container hero-note">
+            <span>BACKEND DEPTH · FULL-STACK RANGE · TECHNICAL OWNERSHIP</span>
+            <span>10+ YEARS IN SOFTWARE ENGINEERING</span>
           </div>
         </section>
 
-        <section className="section about-section" id="about" aria-labelledby="about-heading">
+        <section
+          className="section work-section"
+          id="work"
+          aria-labelledby="work-heading"
+          tabIndex={-1}
+        >
+          <div className="container">
+            <SectionHeading
+              id="work-heading"
+              index="01"
+              label="SELECTED WORK"
+              title="Engineering that meets the real world."
+              description="Case studies built from verified experience, without fabricated product screenshots."
+            />
+            <div className="story-list">
+              {featuredWork.map((story, index) => (
+                <article className="story" key={story.company}>
+                  <div className="story-art" aria-hidden="true">
+                    <span className="story-glyph" data-index={index + 1} />
+                    <span className="story-art-label">FIELD NOTE / 0{index + 1}</span>
+                  </div>
+                  <div className="story-copy">
+                    <div className="story-meta">
+                      <span className="meta">{story.company}</span>
+                      <span className="meta">{story.domain}</span>
+                    </div>
+                    <h3>{story.title}</h3>
+                    <p>{story.summary}</p>
+                    <p className="responsibility">
+                      <strong>Engineering scope:</strong> {story.scope}
+                    </p>
+                    <p className="stackline">{story.technologies.join(' · ')}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section
+          className="section expertise-section"
+          id="expertise"
+          aria-labelledby="expertise-heading"
+          tabIndex={-1}
+        >
+          <div className="container">
+            <SectionHeading
+              id="expertise-heading"
+              index="02"
+              label="EXPERTISE"
+              title="Connected skills, not isolated badges."
+              description="Technical areas brought together in enterprise application work."
+            />
+            <div className="expertise-list" id="skills" tabIndex={-1}>
+              {skillGroups.map((group, index) => (
+                <article className="expertise-row" key={group.title}>
+                  <span className="number">{String(index + 1).padStart(2, '0')}</span>
+                  <h3>{group.title}</h3>
+                  <div className="expertise-detail">
+                    <p>{group.lead}</p>
+                    <span className="examples">{group.supporting.join(' · ')}</span>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section
+          className="section about-section"
+          id="about"
+          aria-labelledby="about-heading"
+          tabIndex={-1}
+        >
           <div className="container">
             <SectionHeading
               id="about-heading"
-              index="01"
-              label="ABOUT ME"
-              title="A practical engineer with a systems view."
+              index="03"
+              label="ABOUT / APPROACH"
+              title="Implementation details, with the whole system in view."
             />
             <div className="about-grid">
-              <p className="about-lead">
-                I connect the details of implementation with the bigger decisions that make software
-                last.
-              </p>
-              <img
-                className="about-portrait"
-                src={profile.portrait.src}
-                alt={profile.portrait.alt}
-                width={profile.portrait.width}
-                height={profile.portrait.height}
-                loading="lazy"
-                decoding="async"
-              />
+              <div className="about-profile">
+                <img
+                  className="about-portrait"
+                  src={profile.portrait.src}
+                  alt={profile.portrait.alt}
+                  width={profile.portrait.width}
+                  height={profile.portrait.height}
+                  loading="lazy"
+                  decoding="async"
+                />
+                <p className="about-statement">SENIOR SOFTWARE ENGINEER · TECHNICAL LEAD</p>
+              </div>
               <div className="about-copy">
                 <p>{profile.about}</p>
                 <p>{profile.aboutLeadership}</p>
+                <div className="interest-block" id="interests" tabIndex={-1}>
+                  <h3>Areas I keep exploring</h3>
+                  <p>{interests.join(' · ')}</p>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="section focus-section" id="expertise" aria-labelledby="focus-heading">
+        <section
+          className="section experience-section"
+          id="experience"
+          aria-labelledby="experience-heading"
+          tabIndex={-1}
+        >
           <div className="container">
             <SectionHeading
-              id="focus-heading"
-              index="02"
-              label="WHAT I DO"
-              title="Engineering focus"
-              description="The work I bring together across backend, frontend, and technical direction."
+              id="experience-heading"
+              index="04"
+              label="EXPERIENCE"
+              title="A decade of building across teams and domains."
+              description="A concise chronology supports the featured engineering stories."
             />
-            <div className="focus-grid">
-              {focusAreas.map((area) => (
-                <article className="focus-card" key={area.number}>
-                  <span className="focus-number">{area.number}</span>
-                  <h3>{area.title}</h3>
-                  <p>{area.description}</p>
-                  <span className="focus-rule" />
+            <div className="history">
+              {experience.map((item) => (
+                <article key={item.company}>
+                  <span className="meta">{item.period}</span>
+                  <h3>
+                    {item.role} · {item.company}
+                  </h3>
+                  <p>{item.summary}</p>
                 </article>
               ))}
+              <article>
+                <span className="meta">2016 — 2018</span>
+                <h3>Earlier engineering roles</h3>
+                <ul className="earlier-career">
+                  {earlierCareer.map((item) => (
+                    <li key={item.company}>
+                      <strong>{item.role}</strong>
+                      <span>
+                        {item.company} · {item.period}
+                      </span>
+                      {item.note && <small>{item.note}</small>}
+                    </li>
+                  ))}
+                </ul>
+              </article>
             </div>
-          </div>
-        </section>
-
-        <section className="section skills-section" id="skills" aria-labelledby="skills-heading">
-          <div className="container">
-            <SectionHeading
-              id="skills-heading"
-              index="03"
-              label="CAPABILITIES"
-              title="A focused technical toolkit"
-              description="Strongest where Java services, modern interfaces, data, and integrations meet."
-            />
-            <div className="skills-grid">
-              {skillGroups.map((group) => (
-                <article className="skill-group" key={group.title}>
-                  <h3>{group.title}</h3>
-                  <p className="skill-lead">{group.lead}</p>
-                  <p className="skill-supporting">{group.supporting.join(' · ')}</p>
-                </article>
-              ))}
-            </div>
+            <details className="experience-details">
+              <summary>View detailed responsibilities and technology context</summary>
+              <div className="experience-list">
+                {experience.map((item) => (
+                  <ExperienceCard item={item} key={`${item.company}-detail`} />
+                ))}
+              </div>
+            </details>
           </div>
         </section>
 
         <ProfessionalJourney />
 
         <section
-          className="section experience-section"
-          id="experience"
-          aria-labelledby="experience-heading"
+          className="section independent-section"
+          id="projects"
+          aria-labelledby="projects-heading"
+          tabIndex={-1}
         >
           <div className="container">
             <SectionHeading
-              id="experience-heading"
-              index="05"
-              label="EXPERIENCE"
-              title="Experience in context"
-              description="Selected work and responsibilities, with an emphasis on recent logistics systems."
+              id="projects-heading"
+              index="06"
+              label="BEYOND THE DAY JOB"
+              title="Independent work and technical writing."
+              description="Exploration is clearly labeled; published writing links directly to Engineering Notes."
             />
-            <div className="experience-list">
-              {experience.map((item) => (
-                <ExperienceCard item={item} key={item.company} />
+            <div className="extra-grid">
+              {projects.map((project) => (
+                <ProjectCard project={project} key={project.name} />
               ))}
-            </div>
-            <div className="earlier-career">
-              <div>
-                <span className="eyebrow">EARLIER CAREER</span>
-                <p>Foundations in application development</p>
-              </div>
-              <ul>
-                {earlierCareer.map((item) => (
-                  <li key={item.company}>
-                    <strong>{item.role}</strong>
-                    <span>
-                      {item.company} · {item.period}
-                    </span>
-                    {item.note && <small>{item.note}</small>}
-                  </li>
-                ))}
-              </ul>
+              <article className="extra-card blog-card">
+                <span className="meta">ENGINEERING NOTES · BLOG</span>
+                <h3>Technical ideas, explained.</h3>
+                <p>Selected writing on quantum computing and post-quantum cryptography.</p>
+                <nav className="extra-links" aria-label="Featured Engineering Notes articles">
+                  {blogArticles.map((article) => (
+                    <a href={article.href} key={article.href}>
+                      {article.title}
+                      <span>{article.series}</span>
+                    </a>
+                  ))}
+                </nav>
+                <a className="browse-link" href="https://blog.jurolc.com/posts/">
+                  Browse Engineering Notes <span aria-hidden="true">↗</span>
+                </a>
+              </article>
             </div>
           </div>
         </section>
@@ -194,18 +295,20 @@ function App() {
           className="section certifications-section"
           id="certifications"
           aria-labelledby="certifications-heading"
+          tabIndex={-1}
         >
           <div className="container">
             <SectionHeading
               id="certifications-heading"
-              index="06"
+              index="07"
               label="CREDENTIALS"
-              title="Certifications"
+              title="Selected certifications."
+              description="A concise record of completed examinations and coursework."
             />
-            <ul className="certification-list">
+            <ul className="cert-list">
               {certifications.map((certification) => (
                 <li key={certification.name}>
-                  <span>{certification.year}</span>
+                  <time dateTime={String(certification.year)}>{certification.year}</time>
                   <strong>{certification.name}</strong>
                 </li>
               ))}
@@ -213,60 +316,14 @@ function App() {
           </div>
         </section>
 
-        <section
-          className="section projects-section"
-          id="projects"
-          aria-labelledby="projects-heading"
-        >
-          <div className="container">
-            <SectionHeading
-              id="projects-heading"
-              index="07"
-              label="PERSONAL WORK"
-              title="Selected projects"
-              description="A space for focused experiments and independent engineering work."
-            />
-            <div className="projects-grid">
-              {projects.map((project) => (
-                <ProjectCard project={project} key={project.name} />
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section
-          className="section interests-section"
-          id="interests"
-          aria-labelledby="interests-heading"
-        >
-          <div className="container interests-grid">
-            <div>
-              <div className="section-kicker">
-                <span>08</span>
-                <span>LOOKING AHEAD</span>
-              </div>
-              <h2 id="interests-heading">What keeps me curious.</h2>
-              <p>Areas I work in, study, and keep exploring as software systems evolve.</p>
-            </div>
-            <ul>
-              {interests.map((interest) => (
-                <li key={interest}>
-                  {interest}
-                  <span aria-hidden="true">↗</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-
-        <section className="contact-section" id="contact" aria-labelledby="contact-heading">
-          <div className="container contact-grid">
-            <div>
-              <p className="eyebrow">09 / CONTACT</p>
-              <h2 id="contact-heading">Let’s talk about building something that works.</h2>
+        <section className="contact" id="contact" aria-labelledby="contact-heading" tabIndex={-1}>
+          <div className="container contact-row">
+            <div className="contact-copy">
+              <p className="section-label">08 / CONTACT</p>
+              <h2 id="contact-heading">Let’s talk about building software that lasts.</h2>
               <p>
-                Open to conversations about senior engineering, technical leadership, and
-                architecture work.
+                For conversations about senior engineering, technical leadership, and architecture
+                work.
               </p>
               <img
                 className="contact-brand-logo"
@@ -278,7 +335,7 @@ function App() {
                 decoding="async"
               />
             </div>
-            <div className="contact-links" role="group" aria-label="Contact methods">
+            <div className="contact-links" role="group" aria-label="Contact and profile links">
               <a href={`mailto:${profile.contact.email}`} aria-label={`Email ${profile.name}`}>
                 <span className="contact-link-label">
                   <ContactIcon name="email" />
@@ -316,32 +373,30 @@ function App() {
           </div>
         </section>
       </main>
-      <footer className="site-footer">
-        <div className="container footer-inner">
-          <span>
-            © {new Date().getFullYear()} {profile.name}
-          </span>
-          <div className="footer-socials">
-            {profile.contact.links
-              .filter((link) => link.url && !link.download)
-              .map((link) => (
-                <a
-                  href={link.url}
-                  key={link.label}
-                  aria-label={link.ariaLabel}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {link.label} ↗
-                </a>
-              ))}
-            <a href={profile.blog.url}>{profile.blog.label}</a>
-          </div>
-          <a href="#top">Back to top ↑</a>
-        </div>
+      <footer className="container footer">
+        <p>
+          © {new Date().getFullYear()} {profile.name}
+        </p>
+        <nav aria-label="Footer links">
+          {profile.contact.links
+            .filter((link) => link.url && !link.download)
+            .map((link) => (
+              <a
+                href={link.url!}
+                key={link.label}
+                aria-label={link.ariaLabel}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {link.label} <span aria-hidden="true">↗</span>
+              </a>
+            ))}
+          <a href={profile.blog.url}>{profile.blog.label}</a>
+        </nav>
+        <a href="#top">Back to top ↑</a>
       </footer>
       <SpeedInsights />
-    </>
+    </div>
   )
 }
 

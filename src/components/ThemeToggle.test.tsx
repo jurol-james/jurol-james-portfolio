@@ -42,7 +42,7 @@ describe('theme preference', () => {
     initializeTheme()
 
     expect(document.documentElement.dataset.theme).toBe('dark')
-    expect(document.querySelector('meta[name="theme-color"]')).toHaveAttribute('content', '#171D19')
+    expect(document.querySelector('meta[name="theme-color"]')).toHaveAttribute('content', '#0B0F14')
   })
 
   it('restores a saved choice ahead of the system preference', () => {
@@ -63,7 +63,7 @@ describe('theme preference', () => {
     await user.click(screen.getByRole('button', { name: 'Switch to dark theme' }))
     expect(document.documentElement.dataset.theme).toBe('dark')
     expect(localStorage.getItem('portfolio-theme')).toBe('dark')
-    expect(document.querySelector('meta[name="theme-color"]')).toHaveAttribute('content', '#171D19')
+    expect(document.querySelector('meta[name="theme-color"]')).toHaveAttribute('content', '#0B0F14')
     expect(screen.getByRole('button', { name: 'Switch to light theme' })).toBeInTheDocument()
   })
 

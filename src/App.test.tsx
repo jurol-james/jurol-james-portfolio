@@ -192,6 +192,22 @@ describe('portfolio', () => {
     ).toHaveAttribute('src', '/jurol-logo.svg')
   })
 
+  it('keeps section labels and descriptions distinct and numbers sections in order', () => {
+    const { container } = render(<App />)
+    const sectionHeads = [...container.querySelectorAll('.section-head')]
+
+    expect(sectionHeads).toHaveLength(7)
+    expect(
+      sectionHeads.map((section) => section.querySelector('.section-label b')?.textContent),
+    ).toEqual(['01', '02', '03', '04', '05', '06', '07'])
+    for (const section of sectionHeads) {
+      expect(section.querySelector('.section-label')).toBeInTheDocument()
+      expect(section.querySelector('.section-head h2')).toBeInTheDocument()
+      expect(section.querySelector('.section-description')).toBeInTheDocument()
+    }
+    expect(container.querySelector('#contact .section-label')).toHaveTextContent('08 / CONTACT')
+  })
+
   it('presents the Professional Journey identities using local accessible logos', () => {
     render(<App />)
 
@@ -219,8 +235,10 @@ describe('portfolio', () => {
     expect(
       within(section).getByRole('img', { name: 'Hadean Supercomputing Ltd' }).parentElement,
     ).toHaveClass('professional-journey-logo-canvas-dark')
-    expect(within(section).getByRole('img', { name: 'JUROL' }).parentElement).toHaveClass(
-      'professional-journey-logo-canvas-dark',
-    )
+    for (const name of ['JUROL', 'Tellworks Logistics', 'AIMS+', 'NEC']) {
+      expect(within(section).getByRole('img', { name }).parentElement).toHaveClass(
+        'professional-journey-logo-canvas-light-in-dark',
+      )
+    }
   })
 })

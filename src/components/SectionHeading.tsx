@@ -8,15 +8,16 @@ interface SectionHeadingProps {
 
 export function SectionHeading({ id, index, label, title, description }: SectionHeadingProps) {
   return (
-    <div className="section-heading">
-      <div className="section-kicker">
-        <span>{index}</span>
-        <span>{label}</span>
-      </div>
-      <div className="section-heading-main">
-        <h2 id={id}>{title}</h2>
-        {description && <p>{description}</p>}
-      </div>
+    <div className="section-head">
+      <p className="section-label">
+        <b>{index}</b> {label}
+      </p>
+      <h2 id={id}>{title}</h2>
+      {description ? (
+        <p className="section-description">{description}</p>
+      ) : (
+        <span className="section-description" aria-hidden="true" />
+      )}
     </div>
   )
 }

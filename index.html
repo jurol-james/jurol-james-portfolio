@@ -3,7 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#17301C" />
+    <meta name="theme-color" content="#F5F7F8" />
+    <link
+      rel="preload"
+      href="/fonts/SpaceGrotesk-Latin-Variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/Inter-Latin-Variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <script>
       ;(() => {
         let saved
@@ -16,7 +30,7 @@
           saved === 'dark' ||
           (saved !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches)
         document.documentElement.dataset.theme = dark ? 'dark' : 'light'
-        if (dark) document.querySelector('meta[name="theme-color"]').content = '#171D19'
+        document.querySelector('meta[name="theme-color"]').content = dark ? '#0B0F14' : '#F5F7F8'
       })()
     </script>
     <meta

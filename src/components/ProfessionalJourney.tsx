@@ -7,19 +7,21 @@ const identities = [
     width: 337,
     height: 337,
     mark: true,
-    darkLogoCanvas: true,
+    lightCanvasInDark: true,
   },
   {
     name: 'Tellworks Logistics',
     src: '/images/professional-journey/tellworks-logistics.svg',
     width: 200,
     height: 52,
+    lightCanvasInDark: true,
   },
   {
     name: 'AIMS+',
     src: '/images/professional-journey/aimsplus.svg',
     width: 274,
     height: 70,
+    lightCanvasInDark: true,
   },
   {
     name: 'CoDev',
@@ -32,6 +34,7 @@ const identities = [
     src: '/images/professional-journey/nec.svg',
     width: 903,
     height: 71,
+    lightCanvasInDark: true,
   },
   {
     name: 'Hadean Supercomputing Ltd',
@@ -52,7 +55,7 @@ export function ProfessionalJourney() {
       <div className="container">
         <SectionHeading
           id="professional-journey-heading"
-          index="04"
+          index="05"
           label="PROFESSIONAL JOURNEY"
           title="Professional Journey"
           description="Selected companies and products I've worked with throughout my career."
@@ -61,9 +64,15 @@ export function ProfessionalJourney() {
           {identities.map((identity) => (
             <li className="professional-journey-card" key={identity.name}>
               <div
-                className={`professional-journey-logo-canvas${
-                  identity.darkLogoCanvas ? ' professional-journey-logo-canvas-dark' : ''
-                }`}
+                className={[
+                  'professional-journey-logo-canvas',
+                  identity.lightCanvasInDark
+                    ? 'professional-journey-logo-canvas-light-in-dark'
+                    : '',
+                  identity.darkLogoCanvas ? 'professional-journey-logo-canvas-dark' : '',
+                ]
+                  .filter(Boolean)
+                  .join(' ')}
               >
                 <img
                   className={

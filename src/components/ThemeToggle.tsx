@@ -12,13 +12,14 @@ function applyTheme(theme: Theme) {
   document.documentElement.dataset.theme = theme
   document
     .querySelector('meta[name="theme-color"]')
-    ?.setAttribute('content', theme === 'dark' ? '#171D19' : '#17301C')
+    ?.setAttribute('content', theme === 'dark' ? '#0B0F14' : '#F5F7F8')
 }
 
 export function ThemeToggle() {
   const [theme, setTheme] = useState<Theme>(currentTheme)
 
   useEffect(() => {
+    applyTheme(currentTheme())
     if (!window.matchMedia) return
     const preference = window.matchMedia('(prefers-color-scheme: dark)')
     const updateFromSystem = () => {
